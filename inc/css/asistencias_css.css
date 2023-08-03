@@ -1,0 +1,169 @@
+#chart{
+    position:relative;
+    margin-top:40px;
+    width:200px;
+    height:200px;
+}
+@-webkit-keyframes bargrowth{
+    0%   {max-height: 0%;}
+    100%  {max-height: 100%;}
+}
+@keyframes bargrowth{
+    0%   {max-height: 0%;}
+    100%  {max-height: 100%;}
+}
+.bar{
+    -webkit-animation: bargrowth 1000ms ease;
+    animation: bargrowth 1000ms ease;
+    position:absolute;
+    bottom:0;
+    display:inline-block;
+    background: #89b800;
+    box-shadow: 1px -1px #79a300, 2px -2px #79a300, 3px -3px #79a300,   4px -4px #79a300, 5px -5px #79a300, 6px -6px #79a300, 7px -7px   #79a300, 8px -8px #79a300, 9px -9px #79a300, 10px -10px #79a300;
+}
+.wrapper{
+    text-align:center;
+    margin:0 auto;
+    margin-top:30px;
+    width:500px;
+    font-family:Helvetica;
+    font-size:12px;
+}
+.wrapper > h1, .wrapper > p{
+    margin:0;
+}    
+
+/* navbar */
+.navbar-default {
+    background-color: #BD2821;
+    border-color: #E7E7E7;
+}
+/* Title */
+.navbar-default .navbar-brand {
+    color: #E7E7E7;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #5E5E5E;
+}
+/* Link */
+.navbar-default .navbar-nav > li > a {
+    color: #E7E7E7;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #333;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #555;
+    background-color: #E7E7E7;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #D5D5D5;
+}
+/* Caret */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* Mobile version */
+.navbar-default .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: #777;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        color: #333;
+    }
+}
+
+.breadcrumb {background: rgba(225, 225, 225, 1); border: 0px solid rgba(231, 231, 231, 1); border-radius: 5px; display: block;}
+.breadcrumb li {font-size: 12px;}
+.breadcrumb a {color: rgba(66, 139, 202, 1);}
+.breadcrumb a:hover {color: rgba(42, 100, 150, 1);}
+.breadcrumb>.active {color: rgba(153, 153, 153, 1);}
+.breadcrumb>li+li:before {color: rgba(204, 204, 204, 1); content: "\002F\00a0";}
+
+.rounded {
+    border-radius: 5px;
+    color: #BD2821;
+    background: #E7E7E7;
+}
+
+.loading {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+        url('../../imagenes/loading.gif') 
+        50% 50% 
+        no-repeat;
+    opacity: 0.80;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 80);
+    filter: alpha(opacity = 80);
+}
+
+.table{
+    font-size: 12px !important;
+}
+
+
+.ordena{
+    cursor: pointer;
+}
+
+.glyphicon{
+    color: #479ECA;
+}
+
+#menu{
+    background-color: #479ECA;
+    border-color: #479ECA;
+}
+
+::-webkit-scrollbar
+{
+    width: 5px;  /* for vertical scrollbars */
+    height: 12px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+    /*background: rgba(0, 0, 0, 0.1);*/
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background: rgba(25, 170, 41, 0.5);
+}
