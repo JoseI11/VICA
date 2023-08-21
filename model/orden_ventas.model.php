@@ -280,9 +280,13 @@ class OrdenVentasModel
 
     public function editOrdenVenta($codigo, $datos)
     {
+      //  echo var_dump(json_decode($datos));
         $hoy = date("Y-m-d H:i:s");
         // echo "val";
-        echo $datos["nombre_facturacion"];
+      //  echo $datos["nombre_facturacion"];
+      $miCadena = strval( $codigo);
+      $onlyconsonants = str_replace('0', "", $miCadena);
+      echo $onlyconsonants;
         try {
             $this->conn->beginTransaction();
             $stmt = $this->conn->prepare('UPDATE orden_ventas set '
@@ -310,6 +314,7 @@ class OrdenVentasModel
             $stmt->bindValue(11, $codigo, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 $this->conn->commit();
+              echo editOrdenVentapersonas();
                 return 0;
             } else {
                 $this->conn->rollBack();
@@ -320,7 +325,27 @@ class OrdenVentasModel
             return -1;
         }
     }
+    public function editOrdenVentapersonas($codigo){
+        try{
+            $sql="SELECT cod_cliente,
+            FROM orden_ventas WHERE codigo = " . $codigo . ";"; 
+            $query = $this->conn->prepare($sql);
+            $query->execute();
+            if ($query->rowCount() > 0) {
+                $result = $query->fetchAll();
+                $val = updatePersonasdescripcion($result);
+                echo $val;
+                return $result;
+            }
+        } catch (PDOException $e) {
+            $error = "Error!: " . $e->getMessage();
 
+            return $error;
+        }
+    }
+    protected function updatePersonasdescripcion($res){
+        return $res;
+    }
     public function editOrdenVentaRec($codigo, $datos)
     {
         $hoy = date("Y-m-d H:i:s");

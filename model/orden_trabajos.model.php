@@ -646,6 +646,7 @@ class OrdenTrabajosModel {
     }
 
     public function updateDetalleTrabajoInsumo($codigo, $id_empleado, $detalle){
+      //$detalle="hola";
         $hoy = date("Y-m-d H:i:s");
         try {
             $this->conn->beginTransaction();
@@ -656,7 +657,7 @@ class OrdenTrabajosModel {
                                             . 'fecha_m = ? '
                                             . ' where id = ?');    
             $stmt->bindValue(1, $id_empleado, PDO::PARAM_INT);
-            $stmt->bindValue(2, $detalle, PDO::PARAM_INT);
+            $stmt->bindValue(2, $detalle, PDO::PARAM_STR);
             $stmt->bindValue(3, $_SESSION["usuario"], PDO::PARAM_STR);
             $stmt->bindValue(4, $hoy, PDO::PARAM_STR);
             $stmt->bindValue(5, $codigo, PDO::PARAM_INT);
@@ -684,7 +685,7 @@ class OrdenTrabajosModel {
                                             . 'fecha_m = ? '
                                             . ' where id = ?');    
             $stmt->bindValue(1, $id_empleado, PDO::PARAM_INT);
-            $stmt->bindValue(2, $detalle, PDO::PARAM_INT);
+            $stmt->bindValue(2, $detalle, PDO::PARAM_STR);
             $stmt->bindValue(3, $_SESSION["usuario"], PDO::PARAM_STR);
             $stmt->bindValue(4, $hoy, PDO::PARAM_STR);
             $stmt->bindValue(5, $codigo, PDO::PARAM_INT);
@@ -714,7 +715,7 @@ class OrdenTrabajosModel {
                                             . 'fecha_m = ? '
                                             . ' where id = ?');    
             $stmt->bindValue(1, $id_empleado, PDO::PARAM_INT);
-            $stmt->bindValue(2, $detalle, PDO::PARAM_INT);
+            $stmt->bindValue(2, $detalle, PDO::PARAM_STR);
             $stmt->bindValue(3, $_SESSION["usuario"], PDO::PARAM_STR);
             $stmt->bindValue(4, $hoy, PDO::PARAM_STR);
             $stmt->bindValue(5, $codigo, PDO::PARAM_INT);

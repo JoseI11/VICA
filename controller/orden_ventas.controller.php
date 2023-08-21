@@ -65,7 +65,7 @@ function getRegistrosFiltroAsociadosRecepcion()
 function editOrdenVenta()
 {
     $controlador = OrdenVentasController::singleton_orden_ventas();
-    echo $_POST["data"];
+    
     echo $controlador->editOrdenVenta(
         $_POST['codigo'],
         $_POST['data']

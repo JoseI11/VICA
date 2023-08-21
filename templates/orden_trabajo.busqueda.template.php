@@ -60,7 +60,7 @@
                 </div>
             </div>
         <?php } ?>
-
+     
         <?php if ($orden_trabajo["codigo_sinfin"] != "") { ?>
             <div class="ibox">
                 <div class="ibox-title">

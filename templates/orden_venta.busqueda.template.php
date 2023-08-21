@@ -124,6 +124,7 @@
         if (!requestSent) {
             requestSent = true;
             var codigo = $("#loading").attr("codigo");
+         
             var parametros = {
                 funcion: "editOrdenVenta",
                 codigo: codigo,
