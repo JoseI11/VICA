@@ -408,7 +408,7 @@ include 'inc/html/breadcrumb.php';
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="label0" class="control-label encabezado-form" >Cantidad:</label>
+                            <label for="label0" class="control-label encabezado-form" >Detalle:</label>
                             <input type="text" class="form-control" id="detallecorreas" name="detallecorreas"  maxlength="100">
                         </div>
                     </div>
@@ -442,7 +442,7 @@ include 'inc/html/breadcrumb.php';
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="label0" class="control-label encabezado-form" >Cantidad:</label>
+                            <label for="label0" class="control-label encabezado-form" >Detalle:</label>
                             <input type="text" class="form-control" id="detalletransmision" name="detalletransmision"  maxlength="100">
                         </div>
                     </div>

@@ -675,6 +675,7 @@ class OrdenTrabajosModel {
     }
 
     public function updateCorreasTrabajoInsumo($codigo, $id_empleado, $detalle){
+       
         $hoy = date("Y-m-d H:i:s");
         try {
             $this->conn->beginTransaction();

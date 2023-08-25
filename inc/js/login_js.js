@@ -12,8 +12,7 @@ $("#ingresar").click(function () {
         nombre: nombre,
         password: password,
     }
-    alert(data.nombre)
-    alert(data.password)
+
     $.ajax({
     
         type: 'POST',

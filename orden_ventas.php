@@ -142,39 +142,39 @@ include 'inc/html/breadcrumb.php';
                     </div>
                     <div class="modal-body">
                         <div id="datos_ajax_register"></div>
-                        
-                            
-                            <div class="form-group " style="display: flex;">
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Trabajo:</label>
-                                <select id="tipoAdd" class="form-control" style="margin-left:1%; width: 20%;" name="tipoAdd">
-                                    <?php foreach ($tipos as $reg) { ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Tipo:</label>
-                                <select id="tipoproductoVenta" class="form-control" style="margin-left:1%; width: 20%;" name="tipoproductoVenta">
-                                    <option value="1" tipo_prod_v="1" class="tipo_prod_v" <?php echo $tipo == 1 ? "selected" : ""; ?>>Insumo</option>
-                                    <option value="2" tipo_prod_v="2" class="tipo_prod_v" <?php echo $tipo == 2 ? "selected" : ""; ?>>Componente</option>
-                                    <option value="3" tipo_prod_v="3" class="tipo_prod_v" <?php echo $tipo == 3 ? "selected" : ""; ?>>Maquina</option>
-                                </select>
-                                <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Uso:</label>
-                                <select id="tipousoVenta" class="form-control" style="margin-left:1%; width: 20%;" name="tipousoVenta">
-                                    <option type="text" value="0" <?php echo ($maquina["es_usado"] == 0) ? "selected" : ''; ?>>Nuevo</option>
-                                    <option type="text" value="1" <?php echo ($maquina["es_usado"] == 1) ? "selected" : ''; ?>>Usado</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group " style="display: flex;">
-                                <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Producto:</label>
-                                <select id="productoAdd" class="form-control prod_opt BuscardorD" style="margin-left:1%; width: 86%;" name="productoAdd">
-
-                                    <?php
-                                    include "./orden_ventas_refactor.php"
-                                    ?>
 
 
+                        <div class="form-group " style="display: flex;">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Trabajo:</label>
+                            <select id="tipoAdd" class="form-control" style="margin-left:1%; width: 20%;" name="tipoAdd">
+                                <?php foreach ($tipos as $reg) { ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Tipo:</label>
+                            <select id="tipoproductoVenta" class="form-control" style="margin-left:1%; width: 20%;" name="tipoproductoVenta">
+                                <option value="1" tipo_prod_v="1" class="tipo_prod_v" <?php echo $tipo == 1 ? "selected" : ""; ?>>Insumo</option>
+                                <option value="2" tipo_prod_v="2" class="tipo_prod_v" <?php echo $tipo == 2 ? "selected" : ""; ?>>Componente</option>
+                                <option value="3" tipo_prod_v="3" class="tipo_prod_v" <?php echo $tipo == 3 ? "selected" : ""; ?>>Maquina</option>
+                            </select>
+                            <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Uso:</label>
+                            <select id="tipousoVenta" class="form-control" style="margin-left:1%; width: 20%;" name="tipousoVenta">
+                                <option type="text" value="0" <?php echo ($maquina["es_usado"] == 0) ? "selected" : ''; ?>>Nuevo</option>
+                                <option type="text" value="1" <?php echo ($maquina["es_usado"] == 1) ? "selected" : ''; ?>>Usado</option>
+                            </select>
+                        </div>
 
-                                    <!--<?php foreach ($insumosprod as $reg) { ?>
+                        <div class="form-group " style="display: flex;">
+                            <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Producto:</label>
+                            <select id="productoAdd" class="form-control prod_opt BuscardorD" style="margin-left:1%; width: 86%;" name="productoAdd">
+
+                                <?php
+                                include "./orden_ventas_refactor.php"
+                                ?>
+
+
+
+                                <!--<?php foreach ($insumosprod as $reg) { ?>
                                     <option class="tipo_de_insumo" tipo="1" estado=<?php echo $reg["es_usado"] ?> value=<?php echo $reg["codigo"] . "INS:" . $reg["descripcion"] ?>></option>
                                     
                                 <?php } ?>
@@ -184,84 +184,102 @@ include 'inc/html/breadcrumb.php';
                                 <?php foreach ($maquinas as $reg) { ?>
                                     <option type="text" value="-<?php echo $reg["codigo"]; ?>">MAQ: <?php echo $reg["descripcion"]; ?></option>
                                 <?php } ?>-->
-                                </select>
-                            </div>
+                            </select>
+                        </div>
 
-                            <div class="form-group " id="estadocobguardar" style="display: flex;">
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado Cobranza:</label>
-                                <select id="cobranzaAdd" class="form-control" style="margin-left:1%; width: 20%;" name="cobranzaAdd">
-                                    <?php foreach ($estados as $reg) {
-                                        if ($reg["cobranza"] == 0) {
-                                            continue;
-                                        }
-                                    ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Precio:</label>
-                                <input type="text" class="form-control" style="margin-left:1%; width: 20%;" id="precioAdd" name="precioAdd">
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado General:</label>
-                                <select id="generalAdd" class="form-control" style="margin-left:1%; width: 20%;" name="generalAdd" <?php if( in_array($_SESSION["cod_rol"], [2])) { echo "disabled"; } ?> >
-                                    <?php foreach ($estados as $reg) {
-                                        if ($reg["general"] == 0) {
-                                            continue;
-                                        }
-                                    ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
+                        <div class="form-group " id="estadocobguardar" style="display: flex;">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado Cobranza:</label>
+                            <select id="cobranzaAdd" class="form-control" style="margin-left:1%; width: 20%;" name="cobranzaAdd">
+                                <?php foreach ($estados as $reg) {
+                                    if ($reg["cobranza"] == 0) {
+                                        continue;
+                                    }
+                                ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Precio:</label>
+                            <input type="text" class="form-control" style="margin-left:1%; width: 20%;" id="precioAdd" name="precioAdd">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado General:</label>
+                            <select id="generalAdd" class="form-control" style="margin-left:1%; width: 20%;" name="generalAdd" <?php if (in_array($_SESSION["cod_rol"], [2])) {
+                                                                                                                                    echo "disabled";
+                                                                                                                                } ?>>
+                                <?php foreach ($estados as $reg) {
+                                    if ($reg["general"] == 0) {
+                                        continue;
+                                    }
+                                ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
 
-                            <div class="form-group " id="estadoentguardar" style="display: flex;">
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado Entrega:</label>
-                                <select id="entregaAdd" class="form-control" style="margin-left:1%; width: 20%;" name="entregaAdd">
-                                    <?php foreach ($estados as $reg) {
-                                        if ($reg["entrega"] == 0) {
-                                            continue;
-                                        }
-                                    ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Fecha:</label>
-                                <input type="date" class="form-control" style="margin-left:1%; width: 20%;" id="fechaAdd" name="fechaAdd" required maxlength="10" value="<?php echo date("Y-m-d"); ?>">
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Cantidad:</label>
-                                <input type="text" class="form-control" style="margin-left:1%; width: 20%;" id="cantidadAdd" name="cantidadAdd">
-                            </div>
+                        <div class="form-group " id="estadoentguardar" style="display: flex;">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado Entrega:</label>
+                            <select id="entregaAdd" class="form-control" style="margin-left:1%; width: 20%;" name="entregaAdd">
+                                <?php foreach ($estados as $reg) {
+                                    if ($reg["entrega"] == 0) {
+                                        continue;
+                                    }
+                                ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Fecha:</label>
+                            <input type="date" class="form-control" style="margin-left:1%; width: 20%;" id="fechaAdd" name="fechaAdd" required maxlength="10" value="<?php echo date("Y-m-d"); ?>">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Cantidad:</label>
+                            <input type="text" class="form-control" style="margin-left:1%; width: 20%;" id="cantidadAdd" name="cantidadAdd">
+                        </div>
 
-                            <div class="form-group " style="display: flex;" id="BuscarCliente2">
-                                
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Cliente:</label>
-                                <select id="clienteAdd" class="form-control BuscardorD" style="margin-left:3%; width: 55%;" name="clienteAdd">
-                                    <?php foreach ($clientes as $reg) { ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
+                        <div class="form-group " style="display: flex;" id="BuscarCliente2">
+                            <select id="options">
+                            <?php foreach ($clientes as $reg) {     $_SESSION["codigoprov"]=$reg["codigo"]?>
+                            
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                                <!-- <option value="" disabled selected>Select an option</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option> -->
+                            </select>
+                            <?php include 'select_dependientes_orden_ventas.php' ?>
+                            <select id="choices">
+                            <?php foreach ($provincias as $reg) { ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                                <!-- <option value="" disabled selected>Please select an option</option> -->
+                            </select>
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Cliente:</label>
+                            <select id="clienteAdd" class="form-control BuscardorD" style="margin-left:3%; width: 55%;" name="clienteAdd">
+                                <?php foreach ($clientes as $reg) { ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
 
-                            </div>
+                        </div>
 
-                            <div class="form-group " style="display: flex;" >
-                                
-                               
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Provincia:</label>
-                                <select id="provinciaAdd" class="form-control" style="margin-left:1%; width: 18.5%;" name="provinciaAdd">
-                                    <?php foreach ($provincias as $reg) { ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Pais:</label>
-                                <select id="paisAdd" class="form-control" style="margin-left:1%; width: 20%;" name="paisAdd">
-                                    <?php foreach ($paises as $reg) { ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
+                        <div class="form-group " style="display: flex;">
 
-                            <div class="form-group " style="display: flex;">
-                                
-                                <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Observaciones:</label>
-                                <input type="text" class="form-control" style="margin-left:1%; width: 86%;" id="observacionesAdd" name="observacionesAdd">
-                            </div>
+
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Provincia:</label>
+                            <select id="provinciaAdd" class="form-control" style="margin-left:1%; width: 18.5%;" name="provinciaAdd">
+                                <?php foreach ($provincias as $reg) { ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Pais:</label>
+                            <select id="paisAdd" class="form-control" style="margin-left:1%; width: 20%;" name="paisAdd">
+                                <?php foreach ($paises as $reg) { ?>
+                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+
+                        <div class="form-group " style="display: flex;">
+
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Observaciones:</label>
+                            <input type="text" class="form-control" style="margin-left:1%; width: 86%;" id="observacionesAdd" name="observacionesAdd">
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -286,8 +304,8 @@ include 'inc/html/breadcrumb.php';
                     <div class="modal-body">
                         <div id="datos_ajax_register"></div>
                         <div class="form-row">
-                            
-                            <div class="form-group col-md-6" >
+
+                            <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Tipo:</label>
                                 <select id="tipoUpdate" class="form-control" style="width : 300px" name="tipoUpdate"> <!--Se produjo un cambio en esta linea-->
                                     <?php foreach ($tipos as $reg) { ?>
@@ -321,7 +339,9 @@ include 'inc/html/breadcrumb.php';
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Estado General:</label>
-                                <select id="generalUpdate" style="width : 300px; heigth : 300px" class="form-control" name="generalUpdate" <?php if( in_array($_SESSION["cod_rol"], [2])) { echo "disabled"; } ?> >
+                                <select id="generalUpdate" style="width : 300px; heigth : 300px" class="form-control" name="generalUpdate" <?php if (in_array($_SESSION["cod_rol"], [2])) {
+                                                                                                                                                echo "disabled";
+                                                                                                                                            } ?>>
                                     <?php foreach ($estados as $reg) {
                                         if ($reg["general"] == 0) {
                                             continue;
@@ -371,7 +391,7 @@ include 'inc/html/breadcrumb.php';
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Entrega a Cliente:</label>
-                                <input type="date" style="width : 300px; heigth : 300px" class="form-control" id="fechaentregaUpdate" name="fechaentregaUpdate"  maxlength="10" >
+                                <input type="date" style="width : 300px; heigth : 300px" class="form-control" id="fechaentregaUpdate" name="fechaentregaUpdate" maxlength="10">
                             </div>
                             <div class="form-group col-md-6">
                                 <br /><br /><br /><br />
@@ -409,8 +429,48 @@ include 'inc/html/footer.php';
 <script type="text/javascript" src="inc/js/orden_ventas_js.js?version=<?php echo date("Y-m-d H:i:s"); ?>"></script>
 <script type="text/javascript" src="inc/js/utils.js"></script>
 <script type="text/javascript" src="inc/js/jquery.table2excel.js"></script>
-<script> 
-$('.BuscardorD').select2({
+<script>
+
+    $('#country').on('change', function(){
+        var countryID = $(this).val();
+        alert(countryID)
+        if(countryID){
+            
+            $.ajax({
+                type:'POST',
+                url:'ajaxData.php',
+                data:'codigo='+countryID,
+                
+                success:function(html){
+                    $('#state').html(html);
+                    $('#city').html('<option value="">Select state first</option>'); 
+                }
+            }); 
+        }else{
+            $('#state').html('<option value="">Select country first</option>');
+            $('#city').html('<option value="">Select state first</option>'); 
+        }
+    });
+    
+    // $('#state').on('change', function(){
+    //     var stateID = $(this).val();
+    //     if(stateID){
+    //         $.ajax({
+    //             type:'GET',
+    //             url:'ajaxData.php',
+    //             data:'codigo='+stateID,
+    //             success:function(html){
+    //                 $('#city').html(html);
+    //             }
+    //         }); 
+    //     }else{
+    //         $('#city').html('<option value="">Select state first</option>'); 
+    //     }
+    // });
+
+
+
+    $('.BuscardorD').select2({
         dropdownParent: $('#BuscarCliente2')
     });
 </script>

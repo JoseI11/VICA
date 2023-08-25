@@ -315,7 +315,7 @@ $("#actualidarDetallesOrdenCompra").submit(function (event) {
             id_empleado: $("#id_empleado").val(),
             detalle: $("#detalledetalle").val()
         }
-        alert(parametros.detalle)
+       
        // console.log(parametros);
         $.ajax({
             type: "POST",
@@ -323,7 +323,7 @@ $("#actualidarDetallesOrdenCompra").submit(function (event) {
             data: parametros,
             success: function (datos) {
                 if (parseInt(datos) == 0) {
-                    alert("hola")
+             
                     location.reload();
                 } else {
                     alert("Error: " + datos);
@@ -337,60 +337,61 @@ $("#actualidarDetallesOrdenCompra").submit(function (event) {
     }
 });
 
-// $("#actualidarCorreasOrdenCompra").submit(function (event) {
-//     if (!requestSent) {
-//         requestSent = true;
-//         var parametros = {
-//             funcion: "updateCorreasTrabajoInsumo",
-//             codigo: codigo,
-//             id_empleado: $("#id_empleadocorreas").val(),
-//             detalle: $("#detallecorreas").val()
-//         }
-//         console.log(parametros);
-//         $.ajax({
-//             type: "POST",
-//             url: 'controller/orden_trabajos.controller.php',
-//             data: parametros,
-//             success: function (datos) {
-//                 if (parseInt(datos) == 0) {
-//                     location.reload();
-//                 } else {
-//                     alert("Error: " + datos);
-//                 }
-//             },
-//             error: function () {
-//                 alert("Error");
-//             }
-//         });
-//         event.preventDefault();
-//     }
-// });
+$("#actualidarCorreasOrdenCompra").submit(function (event) {
+    
+    if (!requestSent) {
+        requestSent = true;
+        var parametros = {
+            funcion: "updateCorreasTrabajoInsumo",
+            codigo: codigo,
+            id_empleado: $("#id_empleadocorreas").val(),
+            detalle: $("#detallecorreas").val()
+        }
+        console.log(parametros);
+        $.ajax({
+            type: "POST",
+            url: 'controller/orden_trabajos.controller.php',
+            data: parametros,
+            success: function (datos) {
+                if (parseInt(datos) == 0) {
+                     location.reload();
+                } else {
+                    alert("Error: " + datos);
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+        event.preventDefault();
+    }
+});
 
-// $("#actualidarTransmisionOrdenCompra").submit(function (event) {
-//     if (!requestSent) {
-//         requestSent = true;
-//         var parametros = {
-//             funcion: "updateTransmisionTrabajoInsumo",
-//             codigo: codigo,
-//             id_empleado: $("#id_empleadotansmision").val(),
-//             detalle: $("#detalletransmision").val()
-//         }
-//         console.log(parametros);
-//         $.ajax({
-//             type: "POST",
-//             url: 'controller/orden_trabajos.controller.php',
-//             data: parametros,
-//             success: function (datos) {
-//                 if (parseInt(datos) == 0) {
-//                     location.reload();
-//                 } else {
-//                     alert("Error: " + datos);
-//                 }
-//             },
-//             error: function () {
-//                 alert("Error");
-//             }
-//         });
-//         event.preventDefault();
-//     }
-// });
+$("#actualidarTransmisionOrdenCompra").submit(function (event) {
+    if (!requestSent) {
+        requestSent = true;
+        var parametros = {
+            funcion: "updateTransmisionTrabajoInsumo",
+            codigo: codigo,
+            id_empleado: $("#id_empleadotansmision").val(),
+            detalle: $("#detalletransmision").val()
+        }
+        console.log(parametros);
+        $.ajax({
+            type: "POST",
+            url: 'controller/orden_trabajos.controller.php',
+            data: parametros,
+            success: function (datos) {
+                if (parseInt(datos) == 0) {
+                    location.reload();
+                } else {
+                    alert("Error: " + datos);
+                }
+            },
+            error: function () {
+                alert("Error");
+            }
+        });
+        event.preventDefault();
+    }
+});

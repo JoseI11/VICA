@@ -199,7 +199,7 @@ $("#actualizarDatosOrdenTrabajo").submit(function (event) {
             data: parametros,
             success: function (datos) {                
                 if (parseInt(datos) >= 0) {
-                    //window.location.href = "orden_trabajo.php?codigo="+datos;
+                    // window.location.href = "orden_trabajo.php?codigo="+datos;
                     location.reload();                    
                 } else {
                     alert("Error: " + datos);
