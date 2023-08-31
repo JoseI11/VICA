@@ -168,24 +168,41 @@ include 'inc/html/breadcrumb.php';
                             <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Producto:</label>
                             <select id="productoAdd" class="form-control prod_opt BuscardorD" style="margin-left:1%; width: 86%;" name="productoAdd">
 
-                                <?php
-                                include "./orden_ventas_refactor.php"
+                                 <?php
+                                // include 'bd/conexion1.php';
+                                // echo $_SESSION["ejemplo"];
+                            
+                                // if ($_SESSION["ejemplo"]=== "1") {
+                                //     $sql = "SELECT p.* FROM componentes p  WHERE p.es_insumo = 1";
+                                //     $result = mysqli_query($conn, $sql);
+                                //     while ($row = mysqli_fetch_array($result)) {
+                                //         echo '<option class="tipo_de_insumo" tipo="' . $tipo . '" estado="' . $row["es_usado"] . '" value="' . $row['codigo'] . '">' . $row['dimension'] . ' (' . $row['codigo_mp'] . ')</option>';
+                                //     }
+                                // } 
+                                // $tipo = 1;
+                                // $sql = "SELECT p.* FROM componentes p  WHERE p.es_insumo = 1";
+                                // $result = mysqli_query($conn, $sql);
+                                // while ($row = mysqli_fetch_array($result)) {
+                                //     echo '<option class="tipo_de_insumo" tipo="' . $tipo . '" estado="' . $row["es_usado"] . '" value="' . $row['codigo'] . '">' . $row['dimension'] . ' (' . $row['codigo_mp'] . ')</option>';
+                                // }
+                                // $tipo = 2;
+                                // //$sql = "SELECT p.* FROM componentes p  WHERE p.es_insumo = 0";
+                                // $sql = "SELECT * FROM maquinas where cod_maquina_modelo in (8,9)";
+                                // $result = mysqli_query($conn, $sql);
+                                // while ($row = mysqli_fetch_array($result)) {
+                                //     echo '<option class="tipo_de_insumo" tipo="' . $tipo . '" estado="' . $row["es_usado"] . '" value="' . $row['codigo'] . '">' . $row['descripcion'] . ' (' . $row['descrip_abrev'] . ')</option>';
+                                // }
+                                // $tipo = 3;
+                                // $sql = "SELECT * FROM maquinas ";
+                                // $result = mysqli_query($conn, $sql);
+                                // while ($row = mysqli_fetch_array($result)) {
+                                //     echo '<option class="tipo_de_insumo" tipo="' . $tipo . '" estado="' . $row["es_usado"] . '"  value="' . $row['codigo'] . '">' . $row['descripcion'] . ' (' . $row['descrip_abrev'] . ')</option>';
+                                // }
+
                                 ?>
-
-
-
-                                <!--<?php foreach ($insumosprod as $reg) { ?>
-                                    <option class="tipo_de_insumo" tipo="1" estado=<?php echo $reg["es_usado"] ?> value=<?php echo $reg["codigo"] . "INS:" . $reg["descripcion"] ?>></option>
-                                    
-                                <?php } ?>
-                                <?php foreach ($productos as $reg) { ?>
-                                    <option type="text" value="<?php echo $reg["codigo"]; ?>">COMP: <?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>
-                                <?php foreach ($maquinas as $reg) { ?>
-                                    <option type="text" value="-<?php echo $reg["codigo"]; ?>">MAQ: <?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>-->
                             </select>
                         </div>
+
 
                         <div class="form-group " id="estadocobguardar" style="display: flex;">
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado Cobranza:</label>
@@ -225,30 +242,14 @@ include 'inc/html/breadcrumb.php';
                                     <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
                                 <?php } ?>
                             </select>
-                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Fecha:</label>
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right">Fecha:</label>
                             <input type="date" class="form-control" style="margin-left:1%; width: 20%;" id="fechaAdd" name="fechaAdd" required maxlength="10" value="<?php echo date("Y-m-d"); ?>">
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Cantidad:</label>
                             <input type="text" class="form-control" style="margin-left:1%; width: 20%;" id="cantidadAdd" name="cantidadAdd">
                         </div>
 
                         <div class="form-group " style="display: flex;" id="BuscarCliente2">
-                            <select id="options">
-                            <?php foreach ($clientes as $reg) {     $_SESSION["codigoprov"]=$reg["codigo"]?>
-                            
-                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>
-                                <!-- <option value="" disabled selected>Select an option</option>
-                                <option value="Option 1">Option 1</option>
-                                <option value="Option 2">Option 2</option>
-                                <option value="Option 3">Option 3</option> -->
-                            </select>
-                            <?php include 'select_dependientes_orden_ventas.php' ?>
-                            <select id="choices">
-                            <?php foreach ($provincias as $reg) { ?>
-                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>
-                                <!-- <option value="" disabled selected>Please select an option</option> -->
-                            </select>
+
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Cliente:</label>
                             <select id="clienteAdd" class="form-control BuscardorD" style="margin-left:3%; width: 55%;" name="clienteAdd">
                                 <?php foreach ($clientes as $reg) { ?>
@@ -262,17 +263,13 @@ include 'inc/html/breadcrumb.php';
 
 
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Provincia:</label>
-                            <select id="provinciaAdd" class="form-control" style="margin-left:1%; width: 18.5%;" name="provinciaAdd">
-                                <?php foreach ($provincias as $reg) { ?>
-                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>
-                            </select>
+
+
+                            <input id="provinciaAdd" style="margin-left:1%; width: 18.5%;" name="provinciaAdd" class="form-control" disabled>
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Pais:</label>
-                            <select id="paisAdd" class="form-control" style="margin-left:1%; width: 20%;" name="paisAdd">
-                                <?php foreach ($paises as $reg) { ?>
-                                    <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>
-                            </select>
+                            <input id="paisAdd" style="margin-left:1%; width: 20%;" name="paisAdd" class="form-control" disabled>
+
+
                         </div>
 
                         <div class="form-group " style="display: flex;">
@@ -307,7 +304,7 @@ include 'inc/html/breadcrumb.php';
 
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Tipo:</label>
-                                <select id="tipoUpdate" class="form-control" style="width : 300px" name="tipoUpdate"> <!--Se produjo un cambio en esta linea-->
+                                <select id="tipoUpdate" class="form-control" style="width : 300px; heigth : 300px" name="tipoUpdate" disabled>
                                     <?php foreach ($tipos as $reg) { ?>
                                         <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
                                     <?php } ?>
@@ -367,8 +364,11 @@ include 'inc/html/breadcrumb.php';
                                         <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
                                     <?php } ?>
                                 </select>
-                            </div>
-                            <div class="form-group col-md-6">
+
+
+                                <div class="form-group col-md-6">
+                                </div>
+
                                 <label for="nombre0" class="control-label">Provincia:</label>
                                 <select id="provinciaUpdate" class="form-control" style="width : 300px; heigth : 300px" name="provinciaUpdate">
                                     <?php foreach ($provincias as $reg) { ?>
@@ -430,46 +430,45 @@ include 'inc/html/footer.php';
 <script type="text/javascript" src="inc/js/utils.js"></script>
 <script type="text/javascript" src="inc/js/jquery.table2excel.js"></script>
 <script>
+    $('#tipoproductoVenta').on('change', function() {
+        var option = $(this).val();
 
-    $('#country').on('change', function(){
-        var countryID = $(this).val();
-        alert(countryID)
-        if(countryID){
-            
+        $.ajax({ 
+            type: "POST",
+            url: "ajaxData.php",
+
+            data: "codigo=" + option, 
+          
+            success: function(html) {
+
+                $("#productoAdd").html(html)
+            }
+        })
+
+    })
+
+
+   
+    $('#clienteAdd').on('change', function() {
+        var state = $(this).val();
+
+      
+        if (state) {
             $.ajax({
-                type:'POST',
-                url:'ajaxData.php',
-                data:'codigo='+countryID,
-                
-                success:function(html){
-                    $('#state').html(html);
-                    $('#city').html('<option value="">Select state first</option>'); 
-                }
-            }); 
-        }else{
-            $('#state').html('<option value="">Select country first</option>');
-            $('#city').html('<option value="">Select state first</option>'); 
-        }
-    });
-    
-    // $('#state').on('change', function(){
-    //     var stateID = $(this).val();
-    //     if(stateID){
-    //         $.ajax({
-    //             type:'GET',
-    //             url:'ajaxData.php',
-    //             data:'codigo='+stateID,
-    //             success:function(html){
-    //                 $('#city').html(html);
-    //             }
-    //         }); 
-    //     }else{
-    //         $('#city').html('<option value="">Select state first</option>'); 
-    //     }
-    // });
+                type: "POST",
+                url: 'selectclient.php',
+                data: 'codigoVal=' + state,
+                success: function(data) {
 
+                    var ca = data.split("-")
 
+                    $("#paisAdd").val(ca[0])
+                    $("#provinciaAdd").val(ca[1])
+                },
 
+            });
+        } 
+    })
     $('.BuscardorD').select2({
         dropdownParent: $('#BuscarCliente2')
     });

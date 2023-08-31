@@ -48,7 +48,34 @@ class OrdenVentasModel
             return $error;
         }
     }
+    public function changeComboprovinciaspaises($codigo){
+        try {
+            $datos=[];
+            $sql = "SELECT ps.descripcion AS descPais,pv.descripcion AS descProv FROM personas prs INNER JOIN paises ps ON prs.cod_provincia=ps.codigo INNER JOIN provincias pv ON pv.codigo=ps.codigo WHERE prs.codigo='".$codigo."'";
+            $query = $this->conn->prepare($sql);
+            $query->execute();
 
+            // while($rows=mysql_fetch_array($sql)){
+
+            //     $datos=array("pais" => $rows["descPais"], "apellido" => $rows["descProv"]);
+            //         //    echo "nombre: ".$rows["descPais"]."<br>";
+            //         //    echo "nombre: ".$rows["descProv"]."<br>";
+                       
+            // }
+         
+            // return $datos;
+
+
+
+            if ($query->rowCount() > 0) {
+                $result = $query->fetchAll();
+                return $result[0];
+            }
+        } catch (PDOException $e) {
+            $error = "Error!: " . $e->getMessage();
+            return $error;
+        }
+    }
     public function getRegistrosFiltro($orderby, $sentido, $registros, $pagina, $busqueda)
     {
         try {
