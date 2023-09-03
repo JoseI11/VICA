@@ -106,6 +106,7 @@ function addOrdenVenta()
         $_POST['pais'],
         $_POST['provincia'],
         $_POST['producto'],
+        $_POST['cuit'],
         $_POST['tipoprod'],
         $_POST['tipouso'],
         $_POST['observaciones'],
@@ -155,6 +156,7 @@ function updateOrdenVenta()
         $_POST['pais'],
         $_POST['provincia'],
         $_POST['producto'],
+        $_POST['cuit'],
         $_POST['tipoprod'],
         $_POST['observaciones'],
         $_POST['general'],
@@ -371,9 +373,9 @@ class OrdenVentasController
         include $_SERVER['DOCUMENT_ROOT'] . "/VICA/templates/orden_venta.insumos.rec.template.php";
     }
 
-    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
+    public function addOrdenVenta($fecha, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
     {
-        $devuelve = $this->conn->addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad);
+        $devuelve = $this->conn->addOrdenVenta($fecha, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad);
         
         if ($devuelve > 0){
             $cod_ot = $devuelve;            
@@ -453,9 +455,9 @@ class OrdenVentasController
         return $devuelve;
     }
 
-    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
+    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
     {
-        $devuelve = $this->conn->updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio);
+        $devuelve = $this->conn->updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio);
 
         return $devuelve;
     }

@@ -269,6 +269,8 @@ include 'inc/html/breadcrumb.php';
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Pais:</label>
                             <input id="paisAdd" style="margin-left:1%; width: 20%;" name="paisAdd" class="form-control" disabled>
 
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Cuit cliente:</label>
+                            <input id="cuitAdd" style="margin-left:1%; width: 20%;" name="cuitAdd" class="form-control" disabled>
 
                         </div>
 
@@ -355,26 +357,28 @@ include 'inc/html/breadcrumb.php';
                                         <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
                                     <?php } ?>
                                 </select>
+                                <div class="form-group col-md-6">
+                                </div>
+
+                                <label for="nombre0" class="control-label" style="position:relative;right:50%">Cuit cliente:</label>
+                                <input id="cuitUpdate" class="form-control" style="width : 300px; heigth : 300px" name="cuitUpdate" disabled/>
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Pais:</label>
-                                <select id="paisUpdate" class="form-control" style="width : 300px; heigth : 300px" name="paisUpdate">
-                                    <?php foreach ($paises as $reg) { ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <input id="paisUpdate" class="form-control" style="width : 300px; heigth : 300px" name="paisUpdate" disabled/>
+                                 
+                   
+                            
 
 
                                 <div class="form-group col-md-6">
                                 </div>
 
-                                <label for="nombre0" class="control-label">Provincia:</label>
-                                <select id="provinciaUpdate" class="form-control" style="width : 300px; heigth : 300px" name="provinciaUpdate">
-                                    <?php foreach ($provincias as $reg) { ?>
-                                        <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <label for="nombre0" class="control-label" style="position:relative;right:50%">Provincia:</label>
+                                <input id="provinciaUpdate" class="form-control" style="width : 300px; heigth : 300px" name="provinciaUpdate" disabled/>
+                                 
+                            
                             </div>
 
                             <div class="form-group col-md-6">
@@ -452,7 +456,7 @@ include 'inc/html/footer.php';
     $('#clienteAdd').on('change', function() {
         var state = $(this).val();
 
-      
+        alert(state);
         if (state) {
             $.ajax({
                 type: "POST",
@@ -460,10 +464,32 @@ include 'inc/html/footer.php';
                 data: 'codigoVal=' + state,
                 success: function(data) {
 
-                    var ca = data.split("-")
+                    let pais_provincia = data.split("*")
+                    alert(pais_provincia[2])
+                    $("#paisAdd").val(pais_provincia[0])
+                    $("#provinciaAdd").val(pais_provincia[1])
+                    $("#cuitAdd").val(pais_provincia[2])
+                },
 
-                    $("#paisAdd").val(ca[0])
-                    $("#provinciaAdd").val(ca[1])
+            });
+        } 
+    })
+    $('#clienteUpdate').on('change', function() {
+        let valSelected = $(this).val();
+
+      
+        if (valSelected) {
+            $.ajax({
+                type: "POST",
+                url: 'selectclient.php',
+                data: 'codigoVal=' + valSelected,
+                success: function(data) {
+
+                    let pais_provincia = data.split("*")
+
+                    $("#paisUpdate").val(pais_provincia[0])
+                    $("#provinciaUpdate").val(pais_provincia[1])
+                    $("#cuitUpdate").val(pais_provincia[2])
                 },
 
             });
