@@ -39,28 +39,28 @@
 
                     <div class="form-group" style="display: flex;">
                     <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Producto:</label>
-                    <input type="text" class="form-control" id="producto" name="producto" style="margin-left:1%; width: 86%;" maxlength="100" value="<?php echo $orden_venta["producto"] ? $orden_venta["producto"] . ' (' . $orden_venta["producto_codigo_mp"] . ')' : $orden_venta["maquina"] . ' (' . $orden_venta["maquina_descrip_abrev"] . ')' ; ?>">
+                    <input type="text" class="form-control" id="producto" name="producto" style="margin-left:1%; width: 86%;" maxlength="100" disabled value="<?php echo $orden_venta["producto"] ? $orden_venta["producto"] . ' (' . $orden_venta["producto_codigo_mp"] . ')' : $orden_venta["maquina"] . ' (' . $orden_venta["maquina_descrip_abrev"] . ')' ; ?>">
                     </div>
 
                     <div class="form-group" style="display: flex;">
                     <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Nro:</label>
-                    <input type="text" class="form-control" id="codigo" name="codigo" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["codigo"]; ?>">
+                    <input type="text" class="form-control" id="codigo" name="codigo" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["codigo"]; ?>">
                     <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Cliente:</label>
-                    <input type="text" class="form-control" id="cliente" name="cliente" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["cliente"]; ?>">
+                    <input type="text" class="form-control" id="cliente" name="cliente" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["cliente"]; ?>">
                     </div>
                     
                     <div class="form-group" style="display: flex;">
                         <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Cantidad:</label>
-                        <input type="text" class="form-control" id="cantidad" name="cantidad" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["cantidad"]; ?>">
+                        <input type="text" class="form-control" id="cantidad" name="cantidad" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["cantidad"]; ?>">
                         <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Precio:</label>
-                        <input type="text" class="form-control" id="precio_maquina" name="precio_maquina" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["precio_maquina"]; ?>">
+                        <input type="text" class="form-control" id="precio_maquina" name="precio_maquina" style="margin-left:1%; width: 20%;" disabled maxlength="100" value="<?php echo $orden_venta["precio_maquina"]; ?>">
                         <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Fecha:</label>
-                        <input type="date" class="form-control" id="fecha" name="fecha" style="margin-left:1%; width: 20%;" maxlength="100"  value="<?php echo $orden_venta["fecha"]; ?>">
+                        <input type="date" class="form-control" id="fecha" name="fecha" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["fecha"]; ?>">
                     </div>
                 </div>
             </div>
         <?php } ?>
-     
+
         <?php if ($orden_trabajo["codigo_sinfin"] != "") { ?>
             <div class="ibox">
                 <div class="ibox-title">
@@ -69,11 +69,11 @@
                 <div class="ibox-content">
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Código:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_sinfin"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_sinfin"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Descripción:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_sinfin"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_sinfin"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Detalle:</label>
@@ -107,11 +107,11 @@
                 <div class="ibox-content">
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Código:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_cajaquebrado"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_cajaquebrado"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Descripción:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_cajaquebrado"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_cajaquebrado"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Detalle:</label>
@@ -146,11 +146,11 @@
                 <div class="ibox-content">
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Código:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_cajaquebrado2"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_cajaquebrado2"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Descripción:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_cajaquebrado2"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_cajaquebrado2"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Detalle:</label>
@@ -185,11 +185,11 @@
                 <div class="ibox-content">
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Código:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_motor"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["codigo_motor"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Descripción:</label>
-                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_motor"]; ?>">
+                        <input type="text" class="form-control" id="descripcion" name="descripcion" required maxlength="100" disabled style="margin-left:1%; width: 74%;" value="<?php echo $orden_trabajo["dimension_motor"]; ?>">
                     </div>
                     <div class="form-group" style="display: flex;">
                         <label for="nombre0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 20%; text-align: right;">Detalle:</label>

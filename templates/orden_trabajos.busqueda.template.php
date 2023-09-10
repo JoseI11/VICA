@@ -17,7 +17,7 @@
                     <?php echo $usu["codigo"]; ?>
                     <?php echo $usu["version"] > 0 ? "/".$usu["version"] : ""; ?>
                 </td>
-                <td class="text-left" style="vertical-align: middle;"><?php echo$newDate = date("d/m/Y", strtotime($usu["fecha_programada_entrega"])); ?></td>
+                <td class="text-left" style="vertical-align: middle;"><?php echo $usu["fecha_programada_entrega"]; ?></td>
                 <td class="text-left" style="vertical-align: middle;">
                         <?php 
                             echo "OV#".$usu["cod_orden_venta"] . " - ";

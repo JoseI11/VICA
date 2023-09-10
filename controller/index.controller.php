@@ -24,7 +24,7 @@ class IndexController {
     public function __construct() {
         try {
             include $_SERVER['DOCUMENT_ROOT']."/VICA/model/index.model.php";
-            $this -> conn = IndexModel::singleton_index();
+            $this->conn = IndexModel::singleton_index();
         } catch (Exception $e) {
             $error = "Error!: " . $e->getMessage();
             return $error;
@@ -40,8 +40,6 @@ class IndexController {
     }
     
     public function logueo($user, $pass){
-
-
         return $this->conn->logueo($user, $pass);
         
     }

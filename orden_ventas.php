@@ -465,7 +465,7 @@ include 'inc/html/footer.php';
                 success: function(data) {
 
                     let pais_provincia = data.split("*")
-                    alert(pais_provincia[2])
+                    
                     $("#paisAdd").val(pais_provincia[0])
                     $("#provinciaAdd").val(pais_provincia[1])
                     $("#cuitAdd").val(pais_provincia[2])

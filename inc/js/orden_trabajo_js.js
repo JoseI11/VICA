@@ -234,7 +234,10 @@ $("#guardarDetallesOrdenCompra").submit(function (event) {
             url: 'controller/orden_trabajos.controller.php',
             data: parametros,
             success: function (datos) {
+
+             
                 if (parseInt(datos) == 0) {
+              
                     location.reload();
                 } else {
                     alert("Error: " + datos);
@@ -307,6 +310,8 @@ $("#guardarTransmisionOrdenCompra").submit(function (event) {
 });
 
 $("#actualidarDetallesOrdenCompra").submit(function (event) {
+
+    let val=document.getElementById("val1");
     if (!requestSent) {
         requestSent = true;
         var parametros = {
@@ -322,8 +327,11 @@ $("#actualidarDetallesOrdenCompra").submit(function (event) {
             url: 'controller/orden_trabajos.controller.php',
             data: parametros,
             success: function (datos) {
-                if (parseInt(datos) == 0) {
-             
+                
+                if (parseInt(datos)==0) {
+            
+                    
+            
                     location.reload();
                 } else {
                     alert("Error: " + datos);

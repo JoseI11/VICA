@@ -5,23 +5,23 @@
 
         <div class="form-group" style="display: flex;">
             <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Producto:</label>
-            <input type="text" class="form-control" id="producto" name="producto" style="margin-left:1%; width: 84%;" maxlength="100" value="<?php echo $orden_venta["producto"] ? $orden_venta["producto"] . ' (' . $orden_venta["producto_codigo_mp"] . ')' : $orden_venta["maquina"] . ' (' . $orden_venta["maquina_descrip_abrev"] . ')'  ; ?>">
+            <input type="text" class="form-control" id="producto" name="producto" style="margin-left:1%; width: 84%;" maxlength="100" disabled value="<?php echo $orden_venta["producto"] ? $orden_venta["producto"] . ' (' . $orden_venta["producto_codigo_mp"] . ')' : $orden_venta["maquina"] . ' (' . $orden_venta["maquina_descrip_abrev"] . ')'  ; ?>">
         </div>
         
         <div class="form-group" style="display: flex;">
             <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Nro:</label>
             <input type="text" class="form-control" id="codigo" name="codigo" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["codigo"]; ?>">
             <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Cliente:</label>
-            <input type="text" class="form-control" id="cliente" name="cliente" style="margin-left:1%; width: 20%;" maxlength="100"  value="<?php echo $orden_venta["cliente"]; ?>">
+            <input type="text" class="form-control" id="cliente" name="cliente" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["cliente"]; ?>">
         </div>
         
         <div class="form-group" style="display: flex;">
             <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Cantidad:</label>
-            <input type="text" class="form-control" id="cantidad" name="cantidad" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["cantidad"]; ?>">
+            <input type="text" class="form-control" id="cantidad" name="cantidad" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["cantidad"]; ?>">
             <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Precio:</label>
-            <input type="text" class="form-control" id="precio_maquina" name="precio_maquina" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["precio_maquina"]; ?>">
+            <input type="text" class="form-control" id="precio_maquina" name="precio_maquina" style="margin-left:1%; width: 20%;" disabled maxlength="100" value="<?php echo $orden_venta["precio_maquina"]; ?>">
             <label for="label0" class="control-label encabezado-form" style="margin-left:1%; margin-top:10px; width: 10%; text-align: right;">Fecha:</label>
-            <input type="date" class="form-control" id="fecha" name="fecha" style="margin-left:1%; width: 20%;" maxlength="100" value="<?php echo $orden_venta["fecha"]; ?>">
+            <input type="date" class="form-control" id="fecha" name="fecha" style="margin-left:1%; width: 20%;" maxlength="100" disabled value="<?php echo $orden_venta["fecha"]; ?>">
         </div>
 
         <div class="form-group" style="display: flex;">
@@ -116,15 +116,11 @@
     $("#btn_guardar").click(function (event) {
         //var formData = $("#guardarDatosComponente").serializeArray();
         var $form = $("#guardarDatosOrdenCompra");
-      
         var formData = getFormData($form);
-        alert(formData)
         var myJsonString = JSON.stringify(formData);
-        alert(myJsonString)
         if (!requestSent) {
             requestSent = true;
             var codigo = $("#loading").attr("codigo");
-         
             var parametros = {
                 funcion: "editOrdenVenta",
                 codigo: codigo,
@@ -135,10 +131,10 @@
                 url: 'controller/orden_ventas.controller.php',
                 data: parametros,
                 success: function (datos) {
-             
+                    console.log(datos);
                     if (parseInt(datos) == 0) {
                         //location.reload();
-                        window.location.href = "orden_ventas.php";
+                        window.location.href = "orden_trabajos.php";
                     } else {
                         alert("Error: " + datos);
                     }

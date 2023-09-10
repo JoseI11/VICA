@@ -5,7 +5,6 @@ error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING ^ E_STRICT);
 session_start();
 
 if (isset($_POST['funcion'])) {
-    echo $_POST['funcion'];
     if (function_exists($_POST['funcion'])) {
         $_POST['funcion']();
     }
@@ -48,10 +47,7 @@ function getRegistrosFiltroAsociados()
 
     echo $controlador->getRegistrosFiltroAsociados($_POST['codigo']);
 }
-function changeComboprovinciaspaises(){
-    $controlador=OrdenVentasController::singleton_orden_ventas();
-    echo $controlador->changeComboprovinciaspaises($_POST['codigo']);
-}
+
 function getRegistrosFiltroAsociadosPagos()
 {
     $controlador = OrdenVentasController::singleton_orden_ventas();
@@ -69,7 +65,7 @@ function getRegistrosFiltroAsociadosRecepcion()
 function editOrdenVenta()
 {
     $controlador = OrdenVentasController::singleton_orden_ventas();
-    
+
     echo $controlador->editOrdenVenta(
         $_POST['codigo'],
         $_POST['data']
@@ -373,9 +369,9 @@ class OrdenVentasController
         include $_SERVER['DOCUMENT_ROOT'] . "/VICA/templates/orden_venta.insumos.rec.template.php";
     }
 
-    public function addOrdenVenta($fecha, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
+    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
     {
-        $devuelve = $this->conn->addOrdenVenta($fecha, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad);
+        $devuelve = $this->conn->addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad);
         
         if ($devuelve > 0){
             $cod_ot = $devuelve;            
@@ -455,9 +451,9 @@ class OrdenVentasController
         return $devuelve;
     }
 
-    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
+    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
     {
-        $devuelve = $this->conn->updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia,$cuit, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio);
+        $devuelve = $this->conn->updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio);
 
         return $devuelve;
     }
@@ -503,12 +499,7 @@ class OrdenVentasController
 
         return $devuelve;
     }
-    public function changeComboprovinciaspaises($codigo){
-        // $devuelve= $this->conn->changeComboprovinciaspaises($codigo);
-        // return json_encode($devuelve[5]['descProv']);
-        // echo $devuelve;
-        // return $devuelve;
-    }
+
     public function getOrdenVenta($codigo)
     {
         $devuelve = $this->conn->getOrdenVenta($codigo);

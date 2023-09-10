@@ -48,35 +48,7 @@ class OrdenVentasModel
             return $error;
         }
     }
-    public function changeComboprovinciaspaises($codigo)
-    {
-        try {
-            $datos = [];
-            $sql = "SELECT ps.descripcion AS descPais,pv.descripcion AS descProv FROM personas prs INNER JOIN paises ps ON prs.cod_provincia=ps.codigo INNER JOIN provincias pv ON pv.codigo=ps.codigo WHERE prs.codigo='" . $codigo . "'";
-            $query = $this->conn->prepare($sql);
-            $query->execute();
 
-            // while($rows=mysql_fetch_array($sql)){
-
-            //     $datos=array("pais" => $rows["descPais"], "apellido" => $rows["descProv"]);
-            //         //    echo "nombre: ".$rows["descPais"]."<br>";
-            //         //    echo "nombre: ".$rows["descProv"]."<br>";
-
-            // }
-
-            // return $datos;
-
-
-
-            if ($query->rowCount() > 0) {
-                $result = $query->fetchAll();
-                return $result[0];
-            }
-        } catch (PDOException $e) {
-            $error = "Error!: " . $e->getMessage();
-            return $error;
-        }
-    }
     public function getRegistrosFiltro($orderby, $sentido, $registros, $pagina, $busqueda)
     {
         try {
@@ -173,17 +145,136 @@ class OrdenVentasModel
         }
     }
 
-    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $cuit, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
+    // public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
+    // {
+    //     $hoy = date("Y-m-d H:i:s");
+    //     try {
+    //         $estado = 1;
+    //         $cadena = explode(":", $tipoprod);
+    //         //echo $cadena[0];
+    //         $this->conn->beginTransaction();
+    //         if ($tipoprod == 3 || $tipoprod == 2) {
+    //             // echo "Pasa Insumo";
+    //             $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad, usuario_m, fecha_m,cod_pais,cod_provincia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,(SELECT ps.codigo FROM paises ps INNER JOIN personas pr ON ps.codigo=pr.cod_pais WHERE pr.codigo=".$cliente."),(SELECT ps.codigo FROM provincias ps INNER JOIN personas pr ON ps.codigo=pr.cod_provincia WHERE pr.codigo=$cliente));');
+    //             $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
+    //             $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
+    //             $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
+    //             $stmt->bindValue(4, $general, PDO::PARAM_INT);
+    //             $stmt->bindValue(5, $entrega, PDO::PARAM_INT);
+    //             $stmt->bindValue(6, $cobranza, PDO::PARAM_INT);
+    //             $stmt->bindValue(7, abs($producto), PDO::PARAM_INT);
+    //             $stmt->bindValue(8, $precio, PDO::PARAM_STR);
+    //             $stmt->bindValue(9, $tipo, PDO::PARAM_INT);
+    //             $stmt->bindValue(10, $cantidad, PDO::PARAM_STR);
+    //           //  $stmt->bindValue(12, $provincia, PDO::PARAM_INT);
+    //             $stmt->bindValue(11, $_SESSION["usuario"], PDO::PARAM_STR);
+    //             $stmt->bindValue(12, $hoy, PDO::PARAM_STR);
+    //             $stmt->bindValue("cliente", $cliente, PDO::PARAM_INT);
+    //             $stmt->bindValue("cliente", $cliente, PDO::PARAM_INT);
+    //             //$stmt->bindParam("codigo", $cliente, PDO::PARAM_INT);
+    //             //    $stmt->bindValue(11, $pais, PDO::PARAM_INT);
+
+    //             if ($stmt->execute()) {
+
+    //                  $this->conn->commit();
+    //                 $sql = "SELECT max(codigo) as maximo FROM orden_ventas;";
+    //                 $query = $this->conn->prepare($sql);
+    //                 $query->execute();
+    //                 if ($query->rowCount() > 0) {
+    //                     $result = $query->fetchAll();
+    //                     return $result[0]["maximo"];
+    //                 }
+    //                 return 0;
+    //             } else {
+    //                 $this->conn->rollBack();
+    //                 return var_dump($stmt->errorInfo());
+    //             }
+    //         } else {
+    //             //echo "Pasa Componente";
+    //             $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad, usuario_m, fecha_m,cod_pais,cod_provincia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,(SELECT ps.codigo FROM paises ps INNER JOIN personas pr ON ps.codigo=pr.cod_pais WHERE pr.codigo="cliente"),(SELECT ps.codigo FROM provincias ps INNER JOIN personas pr ON ps.codigo=pr.cod_provincia WHERE pr.codigo="cliente"));');
+    //             $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
+    //             $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
+    //             $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
+    //             $stmt->bindValue(4, $general, PDO::PARAM_INT);
+    //             $stmt->bindValue(5, $entrega, PDO::PARAM_INT);
+    //             $stmt->bindValue(6, $cobranza, PDO::PARAM_INT);
+    //             $stmt->bindValue(7, abs($producto), PDO::PARAM_INT);
+    //             $stmt->bindValue(8, $precio, PDO::PARAM_STR);
+    //             $stmt->bindValue(9, $tipo, PDO::PARAM_INT);
+    //             $stmt->bindValue(10, $_SESSION["usuario"], PDO::PARAM_STR);
+    //             $stmt->bindValue(11, $hoy, PDO::PARAM_STR);
+    //             $stmt->bindValue("cliente", $cliente, PDO::PARAM_INT);
+    //             $stmt->bindValue("cliente", $cliente, PDO::PARAM_INT);
+    //             if ($stmt->execute()) {
+    //                 $this->conn->commit();
+
+
+    //                 $sql = "SELECT max(codigo) as maximo FROM orden_ventas;";
+    //                 $query = $this->conn->prepare($sql);
+    //                 $query->execute();
+    //                 if ($query->rowCount() > 0) {
+    //                     $result = $query->fetchAll();
+    //                     return $result[0]["maximo"];
+    //                 }
+    //                 return 0;  
+    //             } else {
+    //                 $this->conn->rollBack();
+    //                 return var_dump($stmt->errorInfo());
+    //             }
+    //         } 
+    //     } catch (PDOException $e) {
+    //         $this->conn->rollBack();
+    //         return -1;
+    //     }
+    // }
+    public function getPais($cliente)
+    {
+
+        try {
+            $sql = "SELECT ps.codigo as codigo FROM paises ps INNER JOIN personas pr ON ps.codigo=pr.cod_pais WHERE pr.codigo='" . $cliente . "'";
+            $query = $this->conn->prepare($sql);
+            $query->execute();
+            if ($query->rowCount() > 0) {
+                $result = $query->fetchAll();
+                return $result;
+            }
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            return -1;
+        }
+    }
+    public function getProvincia($cliente)
+    {
+
+        try {
+            $sql = "SELECT ps.codigo as codigo FROM provincias ps INNER JOIN personas pr ON ps.codigo=pr.cod_provincia WHERE pr.codigo='" . $cliente . "'";
+            $query = $this->conn->prepare($sql);
+            $query->execute();
+            if ($query->rowCount() > 0) {
+                $result = $query->fetchAll();
+                return $result;
+            }
+        } catch (PDOException $e) {
+            $this->conn->rollBack();
+            return -1;
+        }
+    }
+    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto, $cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
     {
         $hoy = date("Y-m-d H:i:s");
         try {
+            //     $sql = "SELECT * FROM maquinas WHERE codigo = " . $codigo . ";";
             $estado = 1;
+
             $cadena = explode(":", $tipoprod);
+            $sqlpais = "SELECT ps.codigo FROM paises ps INNER JOIN personas pr ON ps.codigo=pr.cod_pais WHERE pr.codigo=" . $cliente . ";";
+            $sqlprovincia = "SELECT ps.codigo FROM provincias ps INNER JOIN personas pr ON ps.codigo=pr.cod_provincia WHERE pr.codigo=" . $cliente . ";";
             //echo $cadena[0];
+            $valPais = $this->getPais($cliente);
             $this->conn->beginTransaction();
             if ($tipoprod == 3 || $tipoprod == 2) {
                 // echo "Pasa Insumo";
-                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad, cod_pais, cod_provincia,cuit, usuario_m, fecha_m) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m, cod_pais, cod_provincia,cuit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
                 $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
@@ -194,12 +285,12 @@ class OrdenVentasModel
                 $stmt->bindValue(8, $precio, PDO::PARAM_STR);
                 $stmt->bindValue(9, $tipo, PDO::PARAM_INT);
                 $stmt->bindValue(10, $cantidad, PDO::PARAM_STR);
-                $stmt->bindValue(11, $pais, PDO::PARAM_INT);
-                $stmt->bindValue(12, $provincia, PDO::PARAM_INT);
-                $stmt->bindValue(13, $cuit, PDO::PARAM_STR);
-                $stmt->bindValue(14, $_SESSION["usuario"], PDO::PARAM_STR);
-                $stmt->bindValue(15, $hoy, PDO::PARAM_STR);
 
+                $stmt->bindValue(11, $_SESSION["usuario"], PDO::PARAM_STR);
+                $stmt->bindValue(12, $hoy, PDO::PARAM_STR);
+                $stmt->bindValue(13, $this->getPais($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(14,  $this->getProvincia($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(15, $cuit, PDO::PARAM_STR);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     $sql = "SELECT max(codigo) as maximo FROM orden_ventas;";
@@ -216,7 +307,7 @@ class OrdenVentasModel
                 }
             } else {
                 //echo "Pasa Componente";
-                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_componente, precio_maquina, cod_orden_venta_tipo, cantidad, cod_pais, cod_provincia,cuit, usuario_m, fecha_m) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_componente, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m,cod_pais,cod_provincia,cuit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
                 $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
@@ -227,12 +318,11 @@ class OrdenVentasModel
                 $stmt->bindValue(8, $precio, PDO::PARAM_STR);
                 $stmt->bindValue(9, $tipo, PDO::PARAM_INT);
                 $stmt->bindValue(10, $cantidad, PDO::PARAM_STR);
-                $stmt->bindValue(11, $pais, PDO::PARAM_INT);
-                $stmt->bindValue(12, $provincia, PDO::PARAM_INT);
-                $stmt->bindValue(13, $cuit, PDO::PARAM_STR);
-                $stmt->bindValue(14, $_SESSION["usuario"], PDO::PARAM_STR);
-                $stmt->bindValue(15, $hoy, PDO::PARAM_STR);
-
+                $stmt->bindValue(11, $_SESSION["usuario"], PDO::PARAM_STR);
+                $stmt->bindValue(12, $hoy, PDO::PARAM_STR);
+                $stmt->bindValue(13,  $this->getPais($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(14,  $this->getProvincia($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(15, $cuit, PDO::PARAM_STR);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     $sql = "SELECT max(codigo) as maximo FROM orden_ventas;";
@@ -310,13 +400,7 @@ class OrdenVentasModel
 
     public function editOrdenVenta($codigo, $datos)
     {
-        //  echo var_dump(json_decode($datos));
         $hoy = date("Y-m-d H:i:s");
-        // echo "val";
-        //  echo $datos["nombre_facturacion"];
-        $miCadena = strval($codigo);
-        $onlyconsonants = str_replace('0', "", $miCadena);
-        echo $onlyconsonants;
         try {
             $this->conn->beginTransaction();
             $stmt = $this->conn->prepare('UPDATE orden_ventas set '
@@ -344,7 +428,6 @@ class OrdenVentasModel
             $stmt->bindValue(11, $codigo, PDO::PARAM_INT);
             if ($stmt->execute()) {
                 $this->conn->commit();
-                echo editOrdenVentapersonas();
                 return 0;
             } else {
                 $this->conn->rollBack();
@@ -355,29 +438,7 @@ class OrdenVentasModel
             return -1;
         }
     }
-    public function editOrdenVentapersonas($codigo)
-    {
-        try {
-            $sql = "SELECT cod_cliente,
-            FROM orden_ventas WHERE codigo = " . $codigo . ";";
-            $query = $this->conn->prepare($sql);
-            $query->execute();
-            if ($query->rowCount() > 0) {
-                $result = $query->fetchAll();
-                $val = updatePersonasdescripcion($result);
-                echo $val;
-                return $result;
-            }
-        } catch (PDOException $e) {
-            $error = "Error!: " . $e->getMessage();
 
-            return $error;
-        }
-    }
-    protected function updatePersonasdescripcion($res)
-    {
-        return $res;
-    }
     public function editOrdenVentaRec($codigo, $datos)
     {
         $hoy = date("Y-m-d H:i:s");
@@ -436,7 +497,7 @@ class OrdenVentasModel
         }
     }
 
-    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $cuit, $producto, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
+    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto, $cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
     {
         $fechaentrega = $fechaentrega ? $fechaentrega : null;
         $hoy = date("Y-m-d H:i:s");
@@ -455,7 +516,7 @@ class OrdenVentasModel
                     . 'fecha_estimada_entrega = ? , '
                     . 'cod_pais = ? , '
                     . 'cod_provincia = ? , '
-                    . 'cuit = ?'
+                    . 'cuit = ? ,'
                     . 'usuario_m = ? , '
                     . 'fecha_m = ? '
                     . ' where codigo = ?');
@@ -467,8 +528,8 @@ class OrdenVentasModel
                 $stmt->bindValue(6, $cobranza, PDO::PARAM_INT);
                 $stmt->bindValue(7, $precio, PDO::PARAM_STR);
                 $stmt->bindValue(8, $fechaentrega, PDO::PARAM_STR);
-                $stmt->bindValue(9, $pais, PDO::PARAM_INT);
-                $stmt->bindValue(10, $provincia, PDO::PARAM_INT);
+                $stmt->bindValue(9,  $this->getPais($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(10,  $this->getProvincia($cliente), PDO::PARAM_INT);
                 $stmt->bindValue(11, $cuit, PDO::PARAM_STR);
                 $stmt->bindValue(12, $_SESSION["usuario"], PDO::PARAM_STR);
                 $stmt->bindValue(13, $hoy, PDO::PARAM_STR);
@@ -492,6 +553,7 @@ class OrdenVentasModel
                     . 'fecha_estimada_entrega = ? , '
                     . 'cod_pais = ? , '
                     . 'cod_provincia = ? , '
+                    . 'cuit = ?,'
                     . 'usuario_m = ? , '
                     . 'fecha_m = ? '
                     . ' where codigo = ?');
@@ -503,11 +565,12 @@ class OrdenVentasModel
                 $stmt->bindValue(6, $cobranza, PDO::PARAM_INT);
                 $stmt->bindValue(7, $precio, PDO::PARAM_STR);
                 $stmt->bindValue(8, $fechaentrega, PDO::PARAM_STR);
-                $stmt->bindValue(9, $pais, PDO::PARAM_INT);
-                $stmt->bindValue(10, $provincia, PDO::PARAM_INT);
-                $stmt->bindValue(11, $_SESSION["usuario"], PDO::PARAM_STR);
-                $stmt->bindValue(12, $hoy, PDO::PARAM_STR);
-                $stmt->bindValue(13, $codigo, PDO::PARAM_INT);
+                $stmt->bindValue(9,  $this->getPais($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(10,  $this->getProvincia($cliente), PDO::PARAM_INT);
+                $stmt->bindValue(11, $cuit, PDO::PARAM_STR);
+                $stmt->bindValue(12, $_SESSION["usuario"], PDO::PARAM_STR);
+                $stmt->bindValue(13, $hoy, PDO::PARAM_STR);
+                $stmt->bindValue(14, $codigo, PDO::PARAM_INT);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     return 0;
@@ -603,15 +666,15 @@ class OrdenVentasModel
     public function getOrdenVenta($codigo)
     {
         try {
-            $sql = "SELECT *,
-            (select descripcion from personas where codigo = cod_cliente) as cliente,
-            (select descripcion from componentes where codigo = cod_componente) as producto,
-            (select codigo_mp from componentes where codigo = cod_componente) as producto_codigo_mp,
-            (select descripcion from maquinas where codigo = cod_maquina) as maquina,
-            (select descrip_abrev from maquinas where codigo = cod_maquina) as maquina_descrip_abrev,
-            (select descripcion from orden_ventas_estados where codigo = cod_orden_venta_estado_general and general = 1) as estado_general,
-            (select descripcion from orden_ventas_estados where codigo = cod_orden_venta_estado_entrega and entrega = 1) as estado_entrega,
-            (select descripcion from orden_ventas_estados where codigo = cod_orden_venta_estado_cobranza and cobranza = 1) as estado_cobranza FROM orden_ventas WHERE codigo = " . $codigo . ";";
+            $sql = "SELECT ps.descripcion as pais, pv.descripcion as provincia,prs.cuit as cuit, os.*,
+            (select descripcion from personas where codigo = os.cod_cliente) as cliente,
+            (select descripcion from componentes where codigo = os.cod_componente) as producto,
+            (select codigo_mp from componentes where codigo = os.cod_componente) as producto_codigo_mp,
+            (select descripcion from maquinas where codigo = os.cod_maquina) as maquina,
+            (select descrip_abrev from maquinas where codigo = os.cod_maquina) as maquina_descrip_abrev,
+            (select descripcion from orden_ventas_estados where codigo = os.cod_orden_venta_estado_general and general = 1) as estado_general,
+            (select descripcion from orden_ventas_estados where codigo = os.cod_orden_venta_estado_entrega and entrega = 1) as estado_entrega,
+            (select descripcion from orden_ventas_estados where codigo = os.cod_orden_venta_estado_cobranza and cobranza = 1) as estado_cobranza FROM orden_ventas os INNER JOIN personas prs ON prs.codigo=os.cod_cliente INNER JOIN paises ps ON prs.cod_pais=ps.codigo INNER JOIN provincias pv ON prs.cod_provincia=pv.codigo WHERE os.codigo=" . $codigo . ";";
             $query = $this->conn->prepare($sql);
             $query->execute();
             if ($query->rowCount() > 0) {

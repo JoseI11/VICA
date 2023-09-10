@@ -1,6 +1,6 @@
 var requestSent = false;
 var codigo;
-
+var producto;
 $(document).ready(function () {
     $("#busqueda-icono").click();
     //$(".navbar-minimalize").click();
@@ -39,8 +39,9 @@ $('#dataRegister').on('shown.bs.modal', function () {
 });
 $("#productoAdd").change(function () {
     $("#busqueda-icono").click();
-    /*var producto=$(this).val();
-    $("#productoAdd").val(producto);*/
+    producto=$(this).val();
+    alert(producto);
+    /*$("#productoAdd").val(producto);*/
     // $("#busqueda-icono").click();
 
    /* var producto=$(this).val();
@@ -224,12 +225,16 @@ function getRegistros(orderby, sentido, registros, pagina, busqueda, objeto) {
 }
 
 $("#guardarDatosOrdenVenta").submit(function (event) {
+
     if (!requestSent) {
+   
         requestSent = true;
         var parametros = {
+            
             funcion: "addOrdenVenta",
             tipo: $("#tipoAdd").val(),            
-            producto: $("#productoAdd").val(),            
+            producto: producto,
+            cuit:$("#cuitAdd").val(),            
             tipoprod:  $("#tipoproductoVenta").val(),
             tipouso:  $("#tipousoVenta").val(),
             observaciones: $("#observacionesAdd").val(),
@@ -237,7 +242,6 @@ $("#guardarDatosOrdenVenta").submit(function (event) {
             cliente: $("#clienteAdd").val(),
             pais: $("#paisAdd").val(),
             provincia: $("#provinciaAdd").val(),
-            cuit: $("#cuitAdd").val(),
             general: $("#generalAdd").val(),
             entrega: $("#entregaAdd").val(),
             cobranza: $("#cobranzaAdd").val(),
@@ -270,7 +274,8 @@ $("#actualizarDatosOrdenVenta").submit(function (event) {
         var parametros = {
             funcion: "updateOrdenVenta",
             codigo: codigo,
-            producto: $("#productoUpdate").val(),
+            producto: producto,
+            cuit:$("#cuitUpdate").val(),
             tipoprod:  $("#tipoproductoVentaUpdate").val(),
             observaciones: $("#observacionesUpdate").val(),
             fecha: $("#fechaUpdate").val(),
@@ -278,7 +283,6 @@ $("#actualizarDatosOrdenVenta").submit(function (event) {
             cliente: $("#clienteUpdate").val(),
             pais: $("#paisUpdate").val(),
             provincia: $("#provinciaUpdate").val(),
-            cuit: $("#cuitUpdate").val(),
             general: $("#generalUpdate").val(),
             entrega: $("#entregaUpdate").val(),
             cobranza: $("#cobranzaUpdate").val(),

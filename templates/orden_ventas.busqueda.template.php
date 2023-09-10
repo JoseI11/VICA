@@ -210,7 +210,9 @@
     });
 
     $(".editOrdenVenta").click(function() {
+       
         codigo = $(this).closest('tr').attr("codigo");
+       
         //window.location.href = "orden_venta.php?codigo="+codigo;
         $("#text-header-body").html("¿Desea eliminar el registro?");
         $("#btn-eliminar-rol").css("display", "inline-block");
@@ -226,12 +228,14 @@
             data: parametros,
 
             success: function(data) {
+
                 var datos = JSON.parse(data);
 
                 $('#observacionesUpdate').val(datos.observaciones);
                 $('#clienteUpdate').val(datos.cod_cliente);
-                $('#paisUpdate').val(datos.cod_pais);
-                $('#provinciaUpdate').val(datos.cod_provincia);
+                $('#paisUpdate').val(datos.pais);
+                $('#provinciaUpdate').val(datos.provincia);
+                $('#cuitUpdate').val(datos.cuit)
                 $('#tipousoVentaUpdate').val(datos.es_usado);
                 $('#tipousoVentaUpdate').change();
                 $('#tipoproductoVentaUpdate').val(datos.es_insumo);
