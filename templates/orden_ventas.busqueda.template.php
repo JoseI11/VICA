@@ -233,9 +233,8 @@
 
                 $('#observacionesUpdate').val(datos.observaciones);
                 $('#clienteUpdate').val(datos.cod_cliente);
-                $('#paisUpdate').val(datos.pais);
-                $('#provinciaUpdate').val(datos.provincia);
-                $('#cuitUpdate').val(datos.cuit)
+                // $('#paisUpdate').val(datos.pais);
+                // $('#provinciaUpdate').val(datos.provincia);
                 $('#tipousoVentaUpdate').val(datos.es_usado);
                 $('#tipousoVentaUpdate').change();
                 $('#tipoproductoVentaUpdate').val(datos.es_insumo);
@@ -251,7 +250,13 @@
                 $('#tipoUpdate').val(datos.cod_orden_venta_tipo);
 
                 $('#productoUpdate').val(0);
-                //$('.tipo_de_insumo').removeAttr('selected');
+                
+                $('#nombrefacturarUpdate').val(datos.facturacion);
+         
+                $('#entregamaquinaUpdate').val(datos.entregamaquina);
+
+                $('#descuentosformaUpdate').val(datos.descuentos);
+
 
   
                 $('.tipo_de_insumo[tipo='+datos.es_insumo+']').each(function () {

@@ -168,10 +168,10 @@ include 'inc/html/breadcrumb.php';
                             <label for="label0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Producto:</label>
                             <select id="productoAdd" class="form-control prod_opt BuscardorD" style="margin-left:1%; width: 86%;" name="productoAdd">
 
-                                 <?php
+                                <?php
                                 // include 'bd/conexion1.php';
                                 // echo $_SESSION["ejemplo"];
-                            
+
                                 // if ($_SESSION["ejemplo"]=== "1") {
                                 //     $sql = "SELECT p.* FROM componentes p  WHERE p.es_insumo = 1";
                                 //     $result = mysqli_query($conn, $sql);
@@ -205,8 +205,8 @@ include 'inc/html/breadcrumb.php';
 
 
                         <div class="form-group " id="estadocobguardar" style="display: flex;">
-                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado Cobranza:</label>
-                            <select id="cobranzaAdd" class="form-control" style="margin-left:1%; width: 20%;" name="cobranzaAdd">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:2px; width: 15%; text-align: center;">Estado Cobranza:</label>
+                            <select id="cobranzaAdd" class="form-control" style="margin-left:1%; width: 25%;" name="cobranzaAdd">
                                 <?php foreach ($estados as $reg) {
                                     if ($reg["cobranza"] == 0) {
                                         continue;
@@ -215,9 +215,15 @@ include 'inc/html/breadcrumb.php';
                                     <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
                                 <?php } ?>
                             </select>
-                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Precio:</label>
-                            <input type="text" class="form-control" style="margin-left:1%; width: 20%;" id="precioAdd" name="precioAdd">
-                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Estado General:</label>
+
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;position:relative;right:2%">Precio:</label>
+                            <input type="text" class="form-control" id="precioAdd" name="precioAdd" style="position:relative;left:-1%; width: 20%;">
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Observaciones:</label>
+                            <textarea type="text" class="form-control" style="margin-left:1%; width: 50%;" rows="3" cols="30" id="observacionesAdd" name="observacionesAdd"></textarea>
+
+                        </div>
+                        <div class="form-group " id="estadoentguardar" style="display: flex;position:relative;bottom:50px;">
+                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:-5px; width: 15%; text-align: center;">Estado General:</label>
                             <select id="generalAdd" class="form-control" style="margin-left:1%; width: 20%;" name="generalAdd" <?php if (in_array($_SESSION["cod_rol"], [2])) {
                                                                                                                                     echo "disabled";
                                                                                                                                 } ?>>
@@ -269,15 +275,28 @@ include 'inc/html/breadcrumb.php';
                             <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Pais:</label>
                             <input id="paisAdd" style="margin-left:1%; width: 20%;" name="paisAdd" class="form-control" disabled>
 
-                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Cuit cliente:</label>
+                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 15%; text-align: right;">Cuit:</label>
                             <input id="cuitAdd" style="margin-left:1%; width: 20%;" name="cuitAdd" class="form-control" disabled>
 
                         </div>
 
                         <div class="form-group " style="display: flex;">
 
-                            <label for="nombre0" class="control-label encabezado-form" style="margin-top:10px; width: 14%; text-align: right;">Observaciones:</label>
-                            <input type="text" class="form-control" style="margin-left:1%; width: 86%;" id="observacionesAdd" name="observacionesAdd">
+
+
+                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center;">Nombre facturacion:</label>
+                            <input type="text" class="form-control" style="margin-left:1%; width: 40%;" id="nombrefacturarAdd" name="nombrefacturarAdd">
+
+                            <label for="nombre1" class="control-label encabezado-form" style="position:relative;bottom:10%; width: 14%; text-align: center;">Entrega maquina:</label>
+                            <input type="text" class="form-control" style="margin-left:1%; width: 42%;" id="entregamaquinaAdd" name="entregamaquinaAdd">
+                        </div>
+
+                        <div class="form-group " style="display: flex;">
+
+                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center" ;">Descuentos y forma de pago:</label>
+                            <input type="text" class="form-control" style="margin-left:1%; width: 50%;" id="descuentosformaAdd" name="descuentosformaAdd">
+                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center;">Fecha de entrega estimada:</label>
+                            <input type="date" class="form-control" style="margin-left:1%; width: 50%;" id="fechaentregaAdd" name="fechaentregaAdd">
                         </div>
 
                     </div>
@@ -306,7 +325,7 @@ include 'inc/html/breadcrumb.php';
 
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Tipo:</label>
-                                <select id="tipoUpdate" class="form-control" style="width : 300px; heigth : 300px" name="tipoUpdate" disabled>
+                                <select id="tipoUpdate" class="form-control" style="width : 300px; heigth : 300px" name="tipoUpdate">
                                     <?php foreach ($tipos as $reg) { ?>
                                         <option type="text" value="<?php echo $reg["codigo"]; ?>"><?php echo $reg["descripcion"]; ?></option>
                                     <?php } ?>
@@ -361,24 +380,24 @@ include 'inc/html/breadcrumb.php';
                                 </div>
 
                                 <label for="nombre0" class="control-label" style="position:relative;right:50%">Cuit cliente:</label>
-                                <input id="cuitUpdate" class="form-control" style="width : 300px; heigth : 300px" name="cuitUpdate" disabled/>
+                                <input id="cuitUpdate" class="form-control" style="width : 300px; heigth : 300px" name="cuitUpdate" disabled />
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Pais:</label>
-                                <input id="paisUpdate" class="form-control" style="width : 300px; heigth : 300px" name="paisUpdate" disabled/>
-                                 
-                   
-                            
+                                <input id="paisUpdate" class="form-control" style="width : 300px; heigth : 300px" name="paisUpdate" disabled />
+
+
+
 
 
                                 <div class="form-group col-md-6">
                                 </div>
 
                                 <label for="nombre0" class="control-label" style="position:relative;right:50%">Provincia:</label>
-                                <input id="provinciaUpdate" class="form-control" style="width : 300px; heigth : 300px" name="provinciaUpdate" disabled/>
-                                 
-                            
+                                <input id="provinciaUpdate" class="form-control" style="width : 300px; heigth : 300px" name="provinciaUpdate" disabled />
+
+
                             </div>
 
                             <div class="form-group col-md-6">
@@ -396,6 +415,24 @@ include 'inc/html/breadcrumb.php';
                             <div class="form-group col-md-6">
                                 <label for="nombre0" class="control-label">Entrega a Cliente:</label>
                                 <input type="date" style="width : 300px; heigth : 300px" class="form-control" id="fechaentregaUpdate" name="fechaentregaUpdate" maxlength="10">
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label for="nombre0" class="control-label">Nombre facturacion:</label>
+                                <input type="text" style="width : 300px; heigth : 300px" class="form-control" id="nombrefacturarUpdate" name="nombrefacturarUpdate" maxlength="10">
+                            </div>
+
+
+
+                            <div class="form-group col-md-6">
+                                <label for="nombre0" class="control-label">Entrega maquina:</label>
+                                <input type="text" style="width : 300px; heigth : 300px" class="form-control" id="entregamaquinaUpdate" name="entregamaquinaUpdate" maxlength="10">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="nombre0" class="control-label">Descuento:</label>
+                                <input type="text" style="width : 300px; heigth : 300px" class="form-control" id="descuentosformaUpdate" name="descuentosformaUpdate" maxlength="10">
                             </div>
                             <div class="form-group col-md-6">
                                 <br /><br /><br /><br />
@@ -437,12 +474,12 @@ include 'inc/html/footer.php';
     $('#tipoproductoVenta').on('change', function() {
         var option = $(this).val();
 
-        $.ajax({ 
+        $.ajax({
             type: "POST",
             url: "ajaxData.php",
 
-            data: "codigo=" + option, 
-          
+            data: "codigo=" + option,
+
             success: function(html) {
 
                 $("#productoAdd").html(html)
@@ -452,11 +489,11 @@ include 'inc/html/footer.php';
     })
 
 
-   
+
     $('#clienteAdd').on('change', function() {
         var state = $(this).val();
 
-        alert(state);
+    
         if (state) {
             $.ajax({
                 type: "POST",
@@ -465,19 +502,19 @@ include 'inc/html/footer.php';
                 success: function(data) {
 
                     let pais_provincia = data.split("*")
-                    
+
                     $("#paisAdd").val(pais_provincia[0])
                     $("#provinciaAdd").val(pais_provincia[1])
                     $("#cuitAdd").val(pais_provincia[2])
                 },
 
             });
-        } 
+        }
     })
     $('#clienteUpdate').on('change', function() {
         let valSelected = $(this).val();
 
-      
+
         if (valSelected) {
             $.ajax({
                 type: "POST",
@@ -493,7 +530,7 @@ include 'inc/html/footer.php';
                 },
 
             });
-        } 
+        }
     })
     $('.BuscardorD').select2({
         dropdownParent: $('#BuscarCliente2')

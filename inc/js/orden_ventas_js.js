@@ -1,6 +1,6 @@
 var requestSent = false;
 var codigo;
-var producto;
+
 $(document).ready(function () {
     $("#busqueda-icono").click();
     //$(".navbar-minimalize").click();
@@ -26,7 +26,10 @@ $('#dataUpdate').on('shown.bs.modal', function () {
 $('#dataUpdate').on('hidden.bs.modal', function () {
     location.reload();
 });
-
+$('#tipoUpdate').change(function(){
+     var tipo=$(this).val();
+    
+})
 $("#add").click(function () {
     $("#tipoproductoVenta").val(-1);
     $("#tipousoVenta").val(-1);
@@ -39,9 +42,8 @@ $('#dataRegister').on('shown.bs.modal', function () {
 });
 $("#productoAdd").change(function () {
     $("#busqueda-icono").click();
-    producto=$(this).val();
-    alert(producto);
-    /*$("#productoAdd").val(producto);*/
+    /*var producto=$(this).val();
+    $("#productoAdd").val(producto);*/
     // $("#busqueda-icono").click();
 
    /* var producto=$(this).val();
@@ -226,6 +228,7 @@ function getRegistros(orderby, sentido, registros, pagina, busqueda, objeto) {
 
 $("#guardarDatosOrdenVenta").submit(function (event) {
 
+
     if (!requestSent) {
    
         requestSent = true;
@@ -246,7 +249,11 @@ $("#guardarDatosOrdenVenta").submit(function (event) {
             entrega: $("#entregaAdd").val(),
             cobranza: $("#cobranzaAdd").val(),
             precio: $("#precioAdd").val(),
-            cantidad: $("#cantidadAdd").val()
+            cantidad: $("#cantidadAdd").val(),
+            facturacion:$("#nombrefacturarAdd").val(),
+            entregamaquina:$("#entregamaquinaAdd").val(),
+            descuentosforma:$("#descuentosformaAdd").val(),
+            fechaentrega:$("#fechaentregaAdd").val()
         }
         $.ajax({
             type: "POST",
@@ -269,6 +276,7 @@ $("#guardarDatosOrdenVenta").submit(function (event) {
 });
 
 $("#actualizarDatosOrdenVenta").submit(function (event) {
+    alert($("#tipoUpdate").val)
     if (!requestSent) {
         requestSent = true;
         var parametros = {
@@ -276,7 +284,7 @@ $("#actualizarDatosOrdenVenta").submit(function (event) {
             codigo: codigo,
             producto: producto,
             cuit:$("#cuitUpdate").val(),
-            tipoprod:  $("#tipoproductoVentaUpdate").val(),
+            tipoprod:  $("#tipoUpdate").val(),
             observaciones: $("#observacionesUpdate").val(),
             fecha: $("#fechaUpdate").val(),
             fechaentrega: $("#fechaentregaUpdate").val(),
@@ -286,7 +294,11 @@ $("#actualizarDatosOrdenVenta").submit(function (event) {
             general: $("#generalUpdate").val(),
             entrega: $("#entregaUpdate").val(),
             cobranza: $("#cobranzaUpdate").val(),
-            precio: $("#precioUpdate").val()
+            precio: $("#precioUpdate").val(),
+            facturacion:$("#nombrefacturarUpdate").val(),
+            entregamaquina:$("#entregamaquinaUpdate").val(),
+            descuentosforma:$("#descuentosformaUpdate").val(),
+    
         }
         $.ajax({
             type: "POST",

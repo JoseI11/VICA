@@ -111,7 +111,12 @@ function addOrdenVenta()
         $_POST['cobranza'],
         $_POST['precio'],
         $_POST['tipo'],
-        $_POST['cantidad']
+        $_POST['cantidad'],
+        $_POST['facturacion'],
+        $_POST['entregamaquina'],
+        $_POST['descuentosforma'],
+        $_POST['fechaentrega']
+
     );
 }
 
@@ -158,7 +163,10 @@ function updateOrdenVenta()
         $_POST['general'],
         $_POST['entrega'],
         $_POST['cobranza'],
-        $_POST['precio']
+        $_POST['precio'],
+        $_POST['facturacion'],
+        $_POST['entregamaquina'],
+        $_POST['descuentosforma']
     );
 }
 
@@ -369,9 +377,10 @@ class OrdenVentasController
         include $_SERVER['DOCUMENT_ROOT'] . "/VICA/templates/orden_venta.insumos.rec.template.php";
     }
 
-    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
+    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad,$facturacion,$entregamaquina,$descuentosforma,$fechaentrega)
+
     {
-        $devuelve = $this->conn->addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad);
+        $devuelve = $this->conn->addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad,$facturacion,$entregamaquina,$descuentosforma,$fechaentrega);
         
         if ($devuelve > 0){
             $cod_ot = $devuelve;            
@@ -451,9 +460,9 @@ class OrdenVentasController
         return $devuelve;
     }
 
-    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
+    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio,$facturacion,$entregamaquina,$descuentosforma)
     {
-        $devuelve = $this->conn->updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio);
+        $devuelve = $this->conn->updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto,$cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio,$facturacion,$entregamaquina,$descuentosforma);
 
         return $devuelve;
     }

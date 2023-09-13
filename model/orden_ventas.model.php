@@ -259,22 +259,20 @@ class OrdenVentasModel
             return -1;
         }
     }
-    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto, $cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad)
+    public function addOrdenVenta($fecha, $cliente, $pais, $provincia, $producto, $cuit, $tipoprod, $tipouso, $observaciones, $general, $entrega, $cobranza, $precio, $tipo, $cantidad, $facturacion, $entregamaquina, $descuentosforma, $fechaentrega)
     {
         $hoy = date("Y-m-d H:i:s");
         try {
-            //     $sql = "SELECT * FROM maquinas WHERE codigo = " . $codigo . ";";
+
             $estado = 1;
 
             $cadena = explode(":", $tipoprod);
-            $sqlpais = "SELECT ps.codigo FROM paises ps INNER JOIN personas pr ON ps.codigo=pr.cod_pais WHERE pr.codigo=" . $cliente . ";";
-            $sqlprovincia = "SELECT ps.codigo FROM provincias ps INNER JOIN personas pr ON ps.codigo=pr.cod_provincia WHERE pr.codigo=" . $cliente . ";";
-            //echo $cadena[0];
-            $valPais = $this->getPais($cliente);
+
+
             $this->conn->beginTransaction();
             if ($tipoprod == 3 || $tipoprod == 2) {
                 // echo "Pasa Insumo";
-                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m, cod_pais, cod_provincia,cuit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m, cod_pais, cod_provincia,cuit,	nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
                 $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
@@ -291,6 +289,12 @@ class OrdenVentasModel
                 $stmt->bindValue(13, $this->getPais($cliente), PDO::PARAM_INT);
                 $stmt->bindValue(14,  $this->getProvincia($cliente), PDO::PARAM_INT);
                 $stmt->bindValue(15, $cuit, PDO::PARAM_STR);
+                $stmt->bindValue(16, $facturacion, PDO::PARAM_STR);
+                $stmt->bindValue(17, $entregamaquina, PDO::PARAM_STR);
+                $stmt->bindValue(18, $descuentosforma, PDO::PARAM_STR);
+                $stmt->bindValue(19, $fechaentrega, PDO::PARAM_STR);
+
+
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     $sql = "SELECT max(codigo) as maximo FROM orden_ventas;";
@@ -307,7 +311,7 @@ class OrdenVentasModel
                 }
             } else {
                 //echo "Pasa Componente";
-                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_componente, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m,cod_pais,cod_provincia,cuit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_componente, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m,cod_pais,cod_provincia,cuit,nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
                 $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
@@ -323,6 +327,10 @@ class OrdenVentasModel
                 $stmt->bindValue(13,  $this->getPais($cliente), PDO::PARAM_INT);
                 $stmt->bindValue(14,  $this->getProvincia($cliente), PDO::PARAM_INT);
                 $stmt->bindValue(15, $cuit, PDO::PARAM_STR);
+                $stmt->bindValue(16, $facturacion, PDO::PARAM_STR);
+                $stmt->bindValue(17, $entregamaquina, PDO::PARAM_STR);
+                $stmt->bindValue(18, $descuentosforma, PDO::PARAM_STR);
+                $stmt->bindValue(19, $fechaentrega, PDO::PARAM_STR);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     $sql = "SELECT max(codigo) as maximo FROM orden_ventas;";
@@ -497,7 +505,7 @@ class OrdenVentasModel
         }
     }
 
-    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto, $cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio)
+    public function updateOrdenVenta($codigo, $fecha, $fechaentrega, $cliente, $pais, $provincia, $producto, $cuit, $tipoprod, $observaciones, $general, $entrega, $cobranza, $precio, $facturacion, $entregamaquina, $descuentosforma)
     {
         $fechaentrega = $fechaentrega ? $fechaentrega : null;
         $hoy = date("Y-m-d H:i:s");
@@ -518,7 +526,10 @@ class OrdenVentasModel
                     . 'cod_provincia = ? , '
                     . 'cuit = ? ,'
                     . 'usuario_m = ? , '
-                    . 'fecha_m = ? '
+                    . 'fecha_m = ? ,'
+                    . 'nombre_facturacion=? ,'
+                    . 'entrega_maquina=? ,'
+                    . 'descuentos=? '
                     . ' where codigo = ?');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
@@ -533,7 +544,10 @@ class OrdenVentasModel
                 $stmt->bindValue(11, $cuit, PDO::PARAM_STR);
                 $stmt->bindValue(12, $_SESSION["usuario"], PDO::PARAM_STR);
                 $stmt->bindValue(13, $hoy, PDO::PARAM_STR);
-                $stmt->bindValue(14, $codigo, PDO::PARAM_INT);
+                $stmt->bindValue(14, $facturacion, PDO::PARAM_STR);
+                $stmt->bindValue(15, $entregamaquina, PDO::PARAM_STR);
+                $stmt->bindValue(16, $descuentosforma, PDO::PARAM_STR);
+                $stmt->bindValue(17, $codigo, PDO::PARAM_INT);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     return 0;
@@ -555,7 +569,10 @@ class OrdenVentasModel
                     . 'cod_provincia = ? , '
                     . 'cuit = ?,'
                     . 'usuario_m = ? , '
-                    . 'fecha_m = ? '
+                    . 'fecha_m = ? ,'
+                    . 'nombre_facturacion=? ,'
+                    . 'entrega_maquina=? ,'
+                    . 'descuentos=? '
                     . ' where codigo = ?');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
@@ -570,7 +587,10 @@ class OrdenVentasModel
                 $stmt->bindValue(11, $cuit, PDO::PARAM_STR);
                 $stmt->bindValue(12, $_SESSION["usuario"], PDO::PARAM_STR);
                 $stmt->bindValue(13, $hoy, PDO::PARAM_STR);
-                $stmt->bindValue(14, $codigo, PDO::PARAM_INT);
+                $stmt->bindValue(14, $facturacion, PDO::PARAM_STR);
+                $stmt->bindValue(15, $entregamaquina, PDO::PARAM_STR);
+                $stmt->bindValue(16, $descuentosforma, PDO::PARAM_STR);
+                $stmt->bindValue(17, $codigo, PDO::PARAM_INT);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     return 0;
@@ -666,7 +686,7 @@ class OrdenVentasModel
     public function getOrdenVenta($codigo)
     {
         try {
-            $sql = "SELECT ps.descripcion as pais, pv.descripcion as provincia,prs.cuit as cuit, os.*,
+            $sql = "SELECT ps.descripcion as pais, pv.descripcion as provincia,prs.cuit as cuit,os.cod_orden_venta_tipo as tipo,os.nombre_facturacion as facturacion,os.entrega_maquina as entregamaquina,os.descuentos as descuentos , os.*,
             (select descripcion from personas where codigo = os.cod_cliente) as cliente,
             (select descripcion from componentes where codigo = os.cod_componente) as producto,
             (select codigo_mp from componentes where codigo = os.cod_componente) as producto_codigo_mp,
