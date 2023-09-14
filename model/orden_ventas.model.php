@@ -529,7 +529,8 @@ class OrdenVentasModel
                     . 'fecha_m = ? ,'
                     . 'nombre_facturacion=? ,'
                     . 'entrega_maquina=? ,'
-                    . 'descuentos=? '
+                    . 'descuentos=? ,'
+                    .'cod_orden_venta_tipo=?'
                     . ' where codigo = ?');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
@@ -547,7 +548,8 @@ class OrdenVentasModel
                 $stmt->bindValue(14, $facturacion, PDO::PARAM_STR);
                 $stmt->bindValue(15, $entregamaquina, PDO::PARAM_STR);
                 $stmt->bindValue(16, $descuentosforma, PDO::PARAM_STR);
-                $stmt->bindValue(17, $codigo, PDO::PARAM_INT);
+                $stmt->bindValue(17, $tipoprod, PDO::PARAM_INT);
+                $stmt->bindValue(18, $codigo, PDO::PARAM_INT);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     return 0;
@@ -572,7 +574,8 @@ class OrdenVentasModel
                     . 'fecha_m = ? ,'
                     . 'nombre_facturacion=? ,'
                     . 'entrega_maquina=? ,'
-                    . 'descuentos=? '
+                    . 'descuentos=? ,'
+                    .'cod_orden_venta_tipo=?'
                     . ' where codigo = ?');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
@@ -590,7 +593,9 @@ class OrdenVentasModel
                 $stmt->bindValue(14, $facturacion, PDO::PARAM_STR);
                 $stmt->bindValue(15, $entregamaquina, PDO::PARAM_STR);
                 $stmt->bindValue(16, $descuentosforma, PDO::PARAM_STR);
-                $stmt->bindValue(17, $codigo, PDO::PARAM_INT);
+                $stmt->bindValue(17, $tipoprod, PDO::PARAM_INT);
+
+                $stmt->bindValue(18, $codigo, PDO::PARAM_INT);
                 if ($stmt->execute()) {
                     $this->conn->commit();
                     return 0;

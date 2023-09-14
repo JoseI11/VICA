@@ -1,6 +1,7 @@
 var requestSent = false;
 var codigo;
-
+var producto;
+var productoUpdate;
 $(document).ready(function () {
     $("#busqueda-icono").click();
     //$(".navbar-minimalize").click();
@@ -24,7 +25,7 @@ $('#dataUpdate').on('shown.bs.modal', function () {
 });
 
 $('#dataUpdate').on('hidden.bs.modal', function () {
-    location.reload();
+  //  location.reload();
 });
 $('#tipoUpdate').change(function(){
      var tipo=$(this).val();
@@ -42,8 +43,19 @@ $('#dataRegister').on('shown.bs.modal', function () {
 });
 $("#productoAdd").change(function () {
     $("#busqueda-icono").click();
-    /*var producto=$(this).val();
+     producto=$(this).val();
+    /*$("#productoAdd").val(producto);*/
+    // $("#busqueda-icono").click();
+
+   /* var producto=$(this).val();
+    var texto = $(this).find('option:selected').text(); // Capturamos el texto del option 
+    alert(texto);
     $("#productoAdd").val(producto);*/
+});
+$("#productoUpdate").change(function () {
+    //$("#busqueda-icono").click();
+     productoUpdate=$(this).val();
+    /*$("#productoAdd").val(producto);*/
     // $("#busqueda-icono").click();
 
    /* var producto=$(this).val();
@@ -125,6 +137,7 @@ $("#tipousoVentaUpdate").change(function(){
    // $("#busqueda-icono").click();
 
 });
+
 $("#tipoproductoVenta").change(function(){
 
     $(".tipo_de_insumo").css("display","none");
@@ -260,6 +273,7 @@ $("#guardarDatosOrdenVenta").submit(function (event) {
             url: 'controller/orden_ventas.controller.php',
             data: parametros,
             success: function (datos) {                
+                alert(datos)
                 if (parseInt(datos) >= 0) {
                     //window.location.href = "orden_venta.php?codigo="+datos;
                     location.reload();                    
@@ -276,13 +290,14 @@ $("#guardarDatosOrdenVenta").submit(function (event) {
 });
 
 $("#actualizarDatosOrdenVenta").submit(function (event) {
-    alert($("#tipoUpdate").val)
+
     if (!requestSent) {
+
         requestSent = true;
         var parametros = {
             funcion: "updateOrdenVenta",
             codigo: codigo,
-            producto: producto,
+            producto: productoUpdate,
             cuit:$("#cuitUpdate").val(),
             tipoprod:  $("#tipoUpdate").val(),
             observaciones: $("#observacionesUpdate").val(),

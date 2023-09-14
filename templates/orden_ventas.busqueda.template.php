@@ -233,8 +233,10 @@
 
                 $('#observacionesUpdate').val(datos.observaciones);
                 $('#clienteUpdate').val(datos.cod_cliente);
-                // $('#paisUpdate').val(datos.pais);
-                // $('#provinciaUpdate').val(datos.provincia);
+                $('#cuitUpdate').val(datos.cuit);
+                
+                $('#paisUpdate').val(datos.pais);
+                 $('#provinciaUpdate').val(datos.provincia);
                 $('#tipousoVentaUpdate').val(datos.es_usado);
                 $('#tipousoVentaUpdate').change();
                 $('#tipoproductoVentaUpdate').val(datos.es_insumo);
