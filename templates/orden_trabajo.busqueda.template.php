@@ -313,8 +313,8 @@
                 success: function (datos) {
                     console.log(datos);
                     if (parseInt(datos) == 0) {
-                        location.reload();
-                        //window.location.href = "orden_compras.php";
+                       // location.reload();
+                        window.location.href = "orden_trabajo.php";
                     } else {
                         alert("Error: " + datos);
                     }

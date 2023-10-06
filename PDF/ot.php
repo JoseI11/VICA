@@ -465,7 +465,7 @@
                 </tr>
                 <tr>
                     <th style="width: 25%;text-align:right;" class='midnight-blue'>Fecha Entrega Cliente:</th>
-                    <th style="width: 75%;text-align:left;" class='midnight-blue'><?php echo date_format(date_create($orden_venta["fecha"]),"d-m-Y"); ?></th>
+                    <th style="width: 75%;text-align:left;" class='midnight-blue'><?php echo date_format(date_create($orden_venta["fecha_estimada_entrega"]),"d-m-Y"); ?></th>
                 </tr>
             </table>
 

@@ -273,7 +273,7 @@ $("#guardarDatosOrdenVenta").submit(function (event) {
             url: 'controller/orden_ventas.controller.php',
             data: parametros,
             success: function (datos) {                
-                alert(datos)
+          
                 if (parseInt(datos) >= 0) {
                     //window.location.href = "orden_venta.php?codigo="+datos;
                     location.reload();                    

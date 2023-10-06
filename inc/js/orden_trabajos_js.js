@@ -150,9 +150,11 @@ $("#guardarDatosOrdenTrabajo").submit(function (event) {
         const MixArray =  $("#PersonalOtAdd").val().toString()
         const string = MixArray.toString()
         const ans_array = string.split(',')
+
         var parametros = {
             funcion: "addOrdenTrabajo",
-            producto: $("#productoAdd").val(),
+            ordenventa:$("#productoAdd").val(),
+            producto: $("#productoAddtrabajo").val(),
             observaciones: $("#observacionesAdd").val(),
             fecha: $("#fechaAdd").val(),
             cliente: $("#clienteAdd").val(),
@@ -162,6 +164,7 @@ $("#guardarDatosOrdenTrabajo").submit(function (event) {
             id_motor: $("#motorAdd").val(),
             personal_ot: JSON.stringify(ans_array)
         }
+      
         $.ajax({
             type: "POST",
             url: 'controller/orden_trabajos.controller.php',

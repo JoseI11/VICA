@@ -8,6 +8,7 @@ $(document).ready(function () {
     getRegistrosAsociados2();
     getRegistrosAsociados3();
     getRegistrosAsociados4();
+    
 });
 
 $(document).on({

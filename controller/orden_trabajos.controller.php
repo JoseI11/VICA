@@ -125,6 +125,7 @@ function addOrdenTrabajo() {
     echo $controlador->addOrdenTrabajo  (    
                                         $_POST['fecha'],
                                         $_POST['cliente'],
+                                        $_POST['ordenventa'],
                                         $_POST['producto'],
                                         $_POST['observaciones'],
                                         $_POST['id_cajaquebrado'],
@@ -545,8 +546,8 @@ class OrdenTrabajosController {
         
     }
 
-    public function addOrdenTrabajo($fecha, $cliente, $producto, $observaciones, $id_cajaquebrado,$id_cajaquebrado2, $id_sinfin,$id_motor,$personal_ot) {
-        $devuelve = $this->conn->addOrdenTrabajo($fecha, $cliente, $producto, $observaciones, $id_cajaquebrado,$id_cajaquebrado2, $id_sinfin,$id_motor, $personal_ot);
+    public function addOrdenTrabajo($fecha, $cliente,$ordenventa, $producto, $observaciones, $id_cajaquebrado,$id_cajaquebrado2, $id_sinfin,$id_motor,$personal_ot) {
+        $devuelve = $this->conn->addOrdenTrabajo($fecha, $cliente,$ordenventa, $producto, $observaciones, $id_cajaquebrado,$id_cajaquebrado2, $id_sinfin,$id_motor, $personal_ot);
         $ov = $this->getVenta($producto)[0];
         if ($devuelve > 0 and $ov["cod_orden_venta_tipo"] == 1){
             $cod_ot = $devuelve;

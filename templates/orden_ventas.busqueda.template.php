@@ -22,7 +22,8 @@
 
                 <td class="text-center" style="vertical-align: middle;"><?php echo $usu["codigo"]; ?></td>
                 <td class="text-left" style="vertical-align: middle;"><?php echo $usu["cliente"]; ?></td>
-                <td class="text-left" style="vertical-align: middle;"><?php echo $usu["fecha"]; ?></td>
+ 
+                <td class="text-left" style="vertical-align: middle;"><?php $val=date("d/m/Y",strtotime($usu["fecha"])); echo $val;?></td>
                 <td class="text-left" style="vertical-align: middle;"><?php echo $usu["producto"] ? $usu["producto"] : $usu["maquina"]; ?></td>
                 <td class="text-left" style="vertical-align: middle;"><?php echo $usu["cantidad"]; ?></td>
                 <td class="text-left" style="vertical-align: middle;"><?php echo $usu["precio_maquina"]; ?></td>

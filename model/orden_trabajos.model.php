@@ -193,27 +193,48 @@ class OrdenTrabajosModel {
         }
     }
     
-    public function addOrdenTrabajo($fecha, $cliente, $producto, $observaciones, $id_cajaquebrado,$id_cajaquebrado2, $id_sinfin, $id_motor, $personal_ot){
+    public function addOrdenTrabajo($fecha, $cliente,$ordenventa, $producto, $observaciones, $id_cajaquebrado,$id_cajaquebrado2, $id_sinfin, $id_motor, $personal_ot){
         $hoy = date("Y-m-d H:i:s");
         $ov = $this->getVenta($producto)[0];
         try {
-            $estado = 1;
+             $estado = 1;
             $this->conn->beginTransaction();
-            $stmt = $this->conn->prepare('INSERT INTO orden_trabajo (observaciones, cliente, fecha_programada_entrega, cod_orden_trabajo_estado, cod_componente, cod_maquina, cod_orden_venta, version,  usuario_m, fecha_m,id_cajaquebrados,id_cajaquebrados2,id_sinfin,id_motor,personal_ot) VALUES (?,?,?,?,?,?,?,0,?,?,?,?,?,?,?);');
-            $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
-            $stmt->bindValue(2, $cliente, PDO::PARAM_STR);
-            $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
-            $stmt->bindValue(4, $estado, PDO::PARAM_INT);
-            $stmt->bindValue(5, $ov["cod_componente"], PDO::PARAM_INT);
-            $stmt->bindValue(6, $ov["cod_maquina"], PDO::PARAM_INT);
-            $stmt->bindValue(7, $ov["codigo"], PDO::PARAM_INT);
-            $stmt->bindValue(8, $_SESSION["usuario"], PDO::PARAM_STR);
-            $stmt->bindValue(9, $hoy, PDO::PARAM_STR);
-            $stmt->bindValue(10, $id_cajaquebrado, PDO::PARAM_INT);
-            $stmt->bindValue(11, $id_cajaquebrado2, PDO::PARAM_INT);
-            $stmt->bindValue(12, $id_sinfin, PDO::PARAM_INT);
-            $stmt->bindValue(13, $id_motor, PDO::PARAM_INT);
-            $stmt->bindValue(14, $personal_ot,PDO::PARAM_STR);
+            if($ordenventa===null){
+                $stmt = $this->conn->prepare('INSERT INTO orden_trabajo (observaciones, cliente, fecha_programada_entrega, cod_orden_trabajo_estado, cod_componente, cod_maquina,version,  usuario_m, fecha_m,id_cajaquebrados,id_cajaquebrados2,id_sinfin,id_motor,personal_ot) VALUES (?,?,?,?,?,?,0,?,?,?,?,?,?,?);');
+                $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
+                $stmt->bindValue(2, $cliente, PDO::PARAM_STR);
+                $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
+                $stmt->bindValue(4, $estado, PDO::PARAM_INT);
+                $stmt->bindValue(5, $ov["cod_componente"], PDO::PARAM_INT);
+                $stmt->bindValue(6, $ov["cod_maquina"], PDO::PARAM_INT);
+         
+                $stmt->bindValue(7, $_SESSION["usuario"], PDO::PARAM_STR);
+                $stmt->bindValue(8, $hoy, PDO::PARAM_STR);
+                $stmt->bindValue(9, $id_cajaquebrado, PDO::PARAM_INT);
+                $stmt->bindValue(10, $id_cajaquebrado2, PDO::PARAM_INT);
+                $stmt->bindValue(11, $id_sinfin, PDO::PARAM_INT);
+                $stmt->bindValue(12, $id_motor, PDO::PARAM_INT);
+                $stmt->bindValue(13, $personal_ot,PDO::PARAM_STR);
+            }else{
+                $stmt = $this->conn->prepare('INSERT INTO orden_trabajo (observaciones, cliente, fecha_programada_entrega, cod_orden_trabajo_estado, cod_componente, cod_maquina, cod_orden_venta, version,  usuario_m, fecha_m,id_cajaquebrados,id_cajaquebrados2,id_sinfin,id_motor,personal_ot) VALUES (?,?,?,?,?,?,?,0,?,?,?,?,?,?,?);');
+                $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
+                $stmt->bindValue(2, $cliente, PDO::PARAM_STR);
+                $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
+                $stmt->bindValue(4, $estado, PDO::PARAM_INT);
+                $stmt->bindValue(5, $ov["cod_componente"], PDO::PARAM_INT);
+                $stmt->bindValue(6, $ov["cod_maquina"], PDO::PARAM_INT);
+                $stmt->bindValue(7, $ov["codigo"], PDO::PARAM_INT);
+                $stmt->bindValue(8, $_SESSION["usuario"], PDO::PARAM_STR);
+                $stmt->bindValue(9, $hoy, PDO::PARAM_STR);
+                $stmt->bindValue(10, $id_cajaquebrado, PDO::PARAM_INT);
+                $stmt->bindValue(11, $id_cajaquebrado2, PDO::PARAM_INT);
+                $stmt->bindValue(12, $id_sinfin, PDO::PARAM_INT);
+                $stmt->bindValue(13, $id_motor, PDO::PARAM_INT);
+                $stmt->bindValue(14, $personal_ot,PDO::PARAM_STR);
+            }
+           
+        
+       
             
             if($stmt->execute()){
                 $this->conn->commit();

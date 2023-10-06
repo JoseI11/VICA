@@ -691,7 +691,7 @@ class OrdenVentasModel
     public function getOrdenVenta($codigo)
     {
         try {
-            $sql = "SELECT ps.descripcion as pais, pv.descripcion as provincia,prs.cuit as cuit,os.cod_orden_venta_tipo as tipo,os.nombre_facturacion as facturacion,os.entrega_maquina as entregamaquina,os.descuentos as descuentos , os.*,
+            $sql = "SELECT ps.descripcion as pais, pv.descripcion as provincia,prs.cuit as cuit,os.fecha_estimada_entrega as fechacliente,os.cod_orden_venta_tipo as tipo,os.nombre_facturacion as facturacion,os.entrega_maquina as entregamaquina,os.descuentos as descuentos , os.*,
             (select descripcion from personas where codigo = os.cod_cliente) as cliente,
             (select descripcion from componentes where codigo = os.cod_componente) as producto,
             (select codigo_mp from componentes where codigo = os.cod_componente) as producto_codigo_mp,

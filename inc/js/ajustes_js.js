@@ -44,7 +44,7 @@ $("#filtrarDatos").click(function (){
 });
 
 function getRegistros(orderby, sentido, registros, pagina, busqueda, objeto) {
-       //alert(datos);
+       
     if (!requestSent) {
         requestSent = true;
         var valor = $("#loading").attr("valor");

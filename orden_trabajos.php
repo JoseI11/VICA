@@ -139,6 +139,17 @@ include 'inc/html/breadcrumb.php';
                             <input type="date" class="form-control" id="fechaAdd" name="fechaAdd" required maxlength="10" value="<?php echo date("Y-m-d"); ?>">
                         </div>
                         <div class="form-group">
+
+                            <label for="label0" class="control-label ">Tipo:</label>
+                            <select id="tipoproductotrabajo" class="form-control" name="tipoproductotrabajo">
+                                <option value="1" tipo_prod_v="1">Insumo</option>
+                                <option value="2" tipo_prod_v="2">Componente</option>
+                                <option value="3" tipo_prod_v="2">Maquina</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
                             <label for="label0" class="control-label ">Orden de Venta:</label>
                             <select id="productoAdd" class="form-control" name="productoAdd">
                                 <option type="text" value="0"></option>
@@ -154,26 +165,11 @@ include 'inc/html/breadcrumb.php';
                             <p><label id="label2" style="color: #a7b1c2;"></label></p>
                         </div>
                         <div class="form-group " ">
-                        <label for="label0" class="control-label ">Orden de Venta:</label>
+                        <label for=" label0" class="control-label ">Productos: </label>
                             <!--<label for="label0" class="control-label" style="margin-top:10px; position:relative;bottom: 30px; width: 14%; text-align: right;">Producto:</label>-->
-                            <select id="productoAdd" class="form-control" style="margin-left:1%; width: 100%;" name="productoAdd">
-
-                                <?php
-                                include "./orden_ventas_refactor.php"
-                                ?>
+                            <select id="productoAddtrabajo" class="form-control" style="margin-left:1%; width: 100%;" name="productoAddtrabajo">
 
 
-
-                                <!--<?php foreach ($insumosprod as $reg) { ?>
-                                    <option class="tipo_de_insumo" tipo="1" estado=<?php echo $reg["es_usado"] ?> value=<?php echo $reg["codigo"] . "INS:" . $reg["descripcion"] ?>></option>
-                                    
-                                <?php } ?>
-                                <?php foreach ($productos as $reg) { ?>
-                                    <option type="text" value="<?php echo $reg["codigo"]; ?>">COMP: <?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>
-                                <?php foreach ($maquinas as $reg) { ?>
-                                    <option type="text" value="-<?php echo $reg["codigo"]; ?>">MAQ: <?php echo $reg["descripcion"]; ?></option>
-                                <?php } ?>-->
                             </select>
                         </div>
                         <div class="form-group hidden">
@@ -320,6 +316,7 @@ include 'inc/html/breadcrumb.php';
     <button id="add" name="add" type="button" class="btn btn-danger btn-lg boton_marron_carni" style="width: 50px;border-radius: 50%; text-align: center; background-color: transparent;"><i style="margin-bottom: 5px;" class="glyphicon glyphicon-plus"></i></button>
 </div>
 
+
 <?php
 
 include 'inc/html/footer.php';
@@ -327,7 +324,24 @@ include 'inc/html/footer.php';
 ?>
 
 
+<script>
+    $('#tipoproductotrabajo').on('change', function() {
+        var option1 = $(this).val()
 
+        $.ajax({
+            type: "POST",
+            url: "ajaxData.php",
+
+            data: "codigo=" + option1,
+
+            success: function(html) {
+
+                $("#productoAddtrabajo").html(html)
+            }
+        })
+
+    })
+</script>
 
 <script type="text/javascript" src="inc/js/orden_trabajos_js.js?version=<?php echo date("Y-m-d H:i:s"); ?>"></script>
 <script type="text/javascript" src="inc/js/utils.js"></script>
