@@ -284,18 +284,21 @@ include 'inc/html/breadcrumb.php';
 
 
 
-                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center;">Nombre facturacion:</label>
+                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:5px; width: 14%; text-align: center;">Nombre facturacion:</label>
                             <input type="text" class="form-control" style="margin-left:1%; width: 40%;" id="nombrefacturarAdd" name="nombrefacturarAdd">
 
                             <label for="nombre1" class="control-label encabezado-form" style="position:relative;bottom:10%; width: 14%; text-align: center;">Entrega maquina:</label>
                             <input type="text" class="form-control" style="margin-left:1%; width: 42%;" id="entregamaquinaAdd" name="entregamaquinaAdd">
+
+                            <label for="nombre1" class="control-label encabezado-form" style="position:relative;bottom:10%; width: 14%; text-align: center;">Fecha entrega maquina:</label>
+                            <input type="date" class="form-control" style="margin-left:1%; width: 42%;" id="fechaentregamaquinaAdd" name="fechaentregamaquinaAdd">
                         </div>
 
                         <div class="form-group " style="display: flex;">
 
                             <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center" ;">Descuentos y forma de pago:</label>
                             <input type="text" class="form-control" style="margin-left:1%; width: 50%;" id="descuentosformaAdd" name="descuentosformaAdd">
-                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center;">Fecha de entrega estimada:</label>
+                            <label for="nombre0" class="control-label encabezado-form" style="position:relative;bottom:15px; width: 14%; text-align: center;">Fecha de entrega estimada maquina:</label>
                             <input type="date" class="form-control" style="margin-left:1%; width: 50%;" id="fechaentregaAdd" name="fechaentregaAdd">
                         </div>
 

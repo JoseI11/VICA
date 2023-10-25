@@ -266,13 +266,19 @@ class OrdenVentasModel
 
             $estado = 1;
 
-            $cadena = explode(":", $tipoprod);
+         
 
 
             $this->conn->beginTransaction();
             if ($tipoprod == 3 || $tipoprod == 2) {
-                // echo "Pasa Insumo";
-                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m, cod_pais, cod_provincia,cuit,	nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                if($tipoprod==2){
+                    //pasa componente
+                    $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_componente, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m, cod_pais, cod_provincia,cuit,	nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                }else{
+                    //pasa maquina
+                    $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_maquina, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m, cod_pais, cod_provincia,cuit,	nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                }
+       
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
                 $stmt->bindValue(3, $fecha, PDO::PARAM_STR);
@@ -310,8 +316,8 @@ class OrdenVentasModel
                     return var_dump($stmt->errorInfo());
                 }
             } else {
-                //echo "Pasa Componente";
-                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_componente, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m,cod_pais,cod_provincia,cuit,nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
+                //echo "Pasa insumo";
+                $stmt = $this->conn->prepare('INSERT INTO orden_ventas (observaciones, cod_cliente, fecha, cod_orden_venta_estado_general, cod_orden_venta_estado_entrega, cod_orden_venta_estado_cobranza, cod_insumo, precio_maquina, cod_orden_venta_tipo, cantidad,usuario_m, fecha_m,cod_pais,cod_provincia,cuit,nombre_facturacion,entrega_maquina,descuentos,fecha_estimada_entrega) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);');
                 $stmt->bindValue(1, $observaciones, PDO::PARAM_STR);
                 $stmt->bindValue(2, $cliente, PDO::PARAM_INT);
                 $stmt->bindValue(3, $fecha, PDO::PARAM_STR);

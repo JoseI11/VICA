@@ -1,4 +1,4 @@
-<table id="tabla" namefile="OrdenTrabajos" totales="<?php echo $_SESSION["totales"]; ?>" registros="<?php echo $_SESSION['cant_reg']; ?>" pagina="<?php $_SESSION['pagina']; ?>" class="table table-striped table-hover" mes="<?php echo $mes; ?>" anio="<?php echo $anio; ?>" dia="<?php echo $dia; ?>" opcion="<?php echo $opcion; ?>"> 
+<table id="tabla" namefile="OrdenTrabajos" totales="<?php echo $_SESSION["totales"]; ?>" registros="<?php echo $_SESSION['cant_reg']; ?>" pagina="<?php $_SESSION['pagina']; ?>" class="table table-striped table-hover" mes="<?php echo $mes; ?>" anio="<?php echo $anio; ?>" dia="<?php echo $dia; ?>" opcion="<?php echo $opcion; ?>">
     <thead>
         <tr class="row " style="background-color: transparent;">
             <th class="text-center ordena" orderby="cliente" sentido="asc">Nro.</th>
@@ -19,10 +19,13 @@
                 </td>
                 <td class="text-left" style="vertical-align: middle;"><?php  echo date("d/m/Y", strtotime($usu["fecha_programada_entrega"])) ?></td>
                 <td class="text-left" style="vertical-align: middle;">
-                        <?php 
+                        <?php
                             echo "OV#".$usu["cod_orden_venta"] . " - ";
-                            echo $usu["maquina"] ? " MAQ: " : " COMP: ";
-                            echo $usu["maquina"] ? $usu["maquina"] : $usu["producto"];
+                            //echo $usu["maquina"] ? " MAQ: " : " COMP: ";
+                            echo "MAQ"." ".$usu["maquina"]." ";
+
+                            //echo $usu["maquina"]
+                            // echo $usu["maquina"] ? $usu["maquina"] : $usu["producto"];
                         ?>
                     </td>
                 <td class="text-left" style="vertical-align: middle;"><?php echo $usu["observaciones"]; ?></td>
@@ -284,7 +287,7 @@
         //callGetRegistros(orderby, sentido, registros, pagina, busqueda, this);
         //return false;
     });
-    
+
     $("tbody > tr").click(function () {
         $("tbody > tr").css("background-color", "");
         $(this).css("background-color", "#FFFFB8");
